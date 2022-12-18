@@ -1,4 +1,5 @@
 import React from "react";
+import { addPostActionCreator, updateNewPostText } from "redux/profile-reducer";
 
 import classes from "./MyPosts.module.css";
 import { Post } from "./Post/Post";
@@ -10,12 +11,12 @@ export const MyPosts = (props) => {
 
   const addPostHandler = () => {
     const text = textAreaValue;
-    dispatch({ type: "ADD-POST", textData: text });
+    dispatch(addPostActionCreator(text));
   };
 
   const postChangeHandler = () => {
     const text = newPostTextArea.current.value;
-    dispatch({ type: "UPDATE-NEW-POST-TEXT", textData: text });
+    dispatch(updateNewPostText(text));
   };
 
   return (

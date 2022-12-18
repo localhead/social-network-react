@@ -16,6 +16,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 const App = (props) => {
   const { state, dispatch } = props;
 
+  console.log(state.profilePage.postsData);
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -36,7 +38,9 @@ const App = (props) => {
               />
               <Route
                 path="/dialogs"
-                element={<Dialogs state={state.dialogsPage} />}
+                element={
+                  <Dialogs state={state.dialogsPage} dispatch={dispatch} />
+                }
               />
             </Routes>
           </div>

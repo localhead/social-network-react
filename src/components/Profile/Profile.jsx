@@ -7,6 +7,8 @@ import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 export const Profile = (props) => {
   const { postsData, dispatch, textAreaValue } = props;
 
+  console.log(props);
+
   return (
     <div className={classes.content}>
       <ProfileInfo />
