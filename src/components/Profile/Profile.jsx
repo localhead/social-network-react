@@ -1,23 +1,16 @@
 import React from "react";
-import { MyPosts } from "./MyPosts/MyPosts";
+
+import { MyPostsContainer } from "./MyPosts/MyPostsContainer";
 
 import classes from "./Profile.module.css";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 
-export const Profile = (props) => {
-  const { postsData, dispatch, textAreaValue } = props;
-
-  console.log(props);
-
+export const Profile = () => {
   return (
     <div className={classes.content}>
       <ProfileInfo />
 
-      <MyPosts
-        textAreaValue={textAreaValue}
-        postsData={postsData}
-        dispatch={dispatch}
-      />
+      <MyPostsContainer />
     </div>
   );
 };

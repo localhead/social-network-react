@@ -4,24 +4,23 @@ import { DialogItem } from "./DialogItem";
 import { MessageItem } from "./MessageItem";
 
 import classes from "./Dialogs.module.css";
-import { addMessageToDialog, updateMessageText } from "redux/dialogs-reducer";
 
 export const Dialogs = (props) => {
-  const { messagesData, dialogsData, messageTextArea } = props.state;
-  const dispatch = props.dispatch;
+  const { messagesData, dialogsData, messageTextArea } =
+    props.props.dialogsPage;
+  const { onMessageChange, onSendMessage } = props;
 
   const sendMessageLink = React.createRef();
 
-  const sendMessageHandler = () => {
+  const sendMessageHandlerInner = () => {
     const text = messageTextArea;
-    console.log(text, messageTextArea);
-    dispatch(addMessageToDialog(text));
+    onSendMessage(text);
   };
 
-  const messageChangeText = () => {
+  const onMessageChangeInner = () => {
     const text = sendMessageLink.current.value;
 
-    dispatch(updateMessageText(text));
+    onMessageChange(text);
   };
 
   return (
@@ -41,10 +40,10 @@ export const Dialogs = (props) => {
       <div className={classes["send-message-content"]}>
         <textarea
           ref={sendMessageLink}
-          onChange={messageChangeText}
+          onChange={onMessageChangeInner}
           value={messageTextArea}
         ></textarea>
-        <button onClick={sendMessageHandler}>Send Message</button>
+        <button onClick={sendMessageHandlerInner}>Send Message</button>
       </div>
     </div>
   );

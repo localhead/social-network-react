@@ -1,22 +1,25 @@
 import React from "react";
-import { addPostActionCreator, updateNewPostText } from "redux/profile-reducer";
 
 import classes from "./MyPosts.module.css";
 import { Post } from "./Post/Post";
 
 export const MyPosts = (props) => {
-  const { postsData, dispatch, textAreaValue } = props;
+  const { postsData, textAreaValue } = props.props.profilePage;
+
+  const { addPostHandler, postChangeHandler } = props;
 
   const newPostTextArea = React.createRef();
 
-  const addPostHandler = () => {
+  const addPostHandlerInner = () => {
     const text = textAreaValue;
-    dispatch(addPostActionCreator(text));
+
+    console.log(text);
+    addPostHandler(text);
   };
 
-  const postChangeHandler = () => {
+  const postChangeHandlerInner = () => {
     const text = newPostTextArea.current.value;
-    dispatch(updateNewPostText(text));
+    postChangeHandler(text);
   };
 
   return (
@@ -24,12 +27,12 @@ export const MyPosts = (props) => {
       <div>
         <textarea
           ref={newPostTextArea}
-          onChange={postChangeHandler}
+          onChange={postChangeHandlerInner}
           value={textAreaValue}
         />
       </div>
       <div>
-        <button onClick={addPostHandler}>Add Post</button>
+        <button onClick={addPostHandlerInner}>Add Post</button>
       </div>
 
       {postsData.map((item) => {

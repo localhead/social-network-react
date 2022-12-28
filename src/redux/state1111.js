@@ -1,5 +1,6 @@
 import { dialogsReducer } from "./dialogs-reducer";
 import { profileReducer } from "./profile-reducer";
+import { sidebarReducer } from "./sidebar-reducer";
 
 let store = {
   // нижнее подчеркивание значит то, что этот стейт нельзя юзать вне этого объекта
@@ -83,6 +84,7 @@ let store = {
   dispatch(action) {
     this._state.profilePage = profileReducer(this._state.profilePage, action);
     this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+    this._state.sidebarData = sidebarReducer(this._state.sideBarData);
 
     this._callSubscriber(this._state);
   },

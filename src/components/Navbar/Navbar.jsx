@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import classes from "./Navbar.module.css";
 
 export const Navbar = (props) => {
-  const { friendsData } = props.state;
+  const { friendsData } = props.props.sidebarData;
 
   return (
     <nav className={classes.navContent}>
