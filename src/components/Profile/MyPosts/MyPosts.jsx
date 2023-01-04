@@ -13,7 +13,6 @@ export const MyPosts = (props) => {
   const addPostHandlerInner = () => {
     const text = textAreaValue;
 
-    console.log(text);
     addPostHandler(text);
   };
 

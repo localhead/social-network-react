@@ -1,4 +1,4 @@
-let installState = {
+let initialState = {
   dialogsData: [
     { id: 1, name: "Valera" },
     { id: 2, name: "Maria" },
@@ -14,7 +14,7 @@ let installState = {
   messageTextArea: "bad cock",
 };
 
-export const dialogsReducer = (state = installState, action) => {
+export const dialogsReducer = (state = initialState, action) => {
   if (action.type === "UPDATE-MESSAGE-TEXT") {
     let stateCopy = { ...state };
     stateCopy.messageTextArea = action.textData;

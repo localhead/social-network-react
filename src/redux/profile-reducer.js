@@ -1,4 +1,4 @@
-let installState = {
+let initialState = {
   postsData: [
     {
       id: "1",
@@ -25,7 +25,7 @@ let installState = {
   textAreaValue: "fuck life",
 };
 
-export const profileReducer = (state = installState, action) => {
+export const profileReducer = (state = initialState, action) => {
   if (action.type === "ADD-POST") {
     const newPost = [
       {
