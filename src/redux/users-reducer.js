@@ -1,5 +1,8 @@
 let initialState = {
   users: [],
+  pageSize: 5,
+  totalUserCount: 1,
+  currentPage: 0,
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -28,9 +31,17 @@ export const usersReducer = (state = initialState, action) => {
     };
     return stateCopy;
   } else if (action.type === "SET-USERS") {
-    console.log(action.users);
-    const res = { users: [...action.users] };
-    console.log(res);
+    const res = { ...state, users: [...action.users] };
+
+    console.log(state);
+    return res;
+  } else if (action.type === "SET-PAGE") {
+    const res = { ...state, currentPage: action.page };
+
+    return res;
+  } else if (action.type === "SET-USERS-COUNT") {
+    const res = { ...state, totalUserCount: action.count };
+
     return res;
   }
   return state;
@@ -54,5 +65,19 @@ export const setUsersAction = (users) => {
   return {
     type: "SET-USERS",
     users: users,
+  };
+};
+
+export const setCurrentPageAction = (page) => {
+  return {
+    type: "SET-PAGE",
+    page: page,
+  };
+};
+
+export const setTotalCountUsers = (count) => {
+  return {
+    type: "SET-USERS-COUNT",
+    count: count,
   };
 };

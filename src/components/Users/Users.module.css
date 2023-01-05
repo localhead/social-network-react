@@ -4,3 +4,25 @@
   object-fit: cover;
   border-radius: 50%;
 }
+
+.buttonSelected {
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.buttonBasic {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.pages {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  width: 100%;
+
+  flex-basis: 100%;
+}

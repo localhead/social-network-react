@@ -50,6 +50,18 @@ export const Navbar = (props) => {
             Music
           </NavLink>
         </li>
+
+        <li>
+          <NavLink
+            to="/users"
+            className={(navData) =>
+              navData.isActive ? classes.active : classes.item
+            }
+          >
+            Users
+          </NavLink>
+        </li>
+
         <li>
           <NavLink
             to="/settings"
