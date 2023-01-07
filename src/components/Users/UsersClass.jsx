@@ -1,6 +1,7 @@
 import axios from "axios";
+import { Preloader } from "components/common/preloader/Preloader";
 import React from "react";
-import classes from "./Users.module.css";
+import { Users } from "./Users";
 
 export class UsersClass extends React.Component {
   /*   constructor(props) {
@@ -13,15 +14,20 @@ export class UsersClass extends React.Component {
   } */
 
   componentDidMount() {
+    const setFetching = this.props.setFetching;
+    setFetching(true);
+
     this.getUsersCount();
+    this.onChangePage(1);
   }
 
   onChangePage = (number) => {
-    const setPage = this.props.setPage;
-    const setUsersData = this.props.setUsersData;
-
+    const setPage = this.props.setCurrentPage;
+    const setUsersData = this.props.setUsers;
+    const setFetching = this.props.setFetching;
     const pageSize = this.props.props.usersData.pageSize;
 
+    setFetching(true);
     setPage(number);
 
     axios
@@ -29,97 +35,34 @@ export class UsersClass extends React.Component {
         `https://social-network.samuraijs.com/api/1.0/users?page=${number}&count=${pageSize}`
       )
       .then((response) => {
-        console.log(response.data.totalCount);
         setUsersData(response.data.items);
+        setFetching(false);
       });
   };
 
   getUsersCount = () => {
-    const setCount = this.props.setCount;
+    const setFetching = this.props.setFetching;
+    const setCount = this.props.setTotalCount;
+
     axios
       .get(`https://social-network.samuraijs.com/api/1.0/users`)
       .then((response) => {
-        console.log(response.data.totalCount);
         setCount(Math.ceil(response.data.totalCount / 100));
+        setFetching(false);
       });
   };
 
   render() {
-    const users = this.props.props.usersData.users;
-    const onFollowUser = this.props.onFollowUser;
-    const onUnFollowUser = this.props.onUnFollowUser;
-
-    const pageSize = this.props.props.usersData.pageSize;
-    const totalUserCount = this.props.props.usersData.totalUserCount;
-    const currentPage = this.props.props.usersData.currentPage;
-
-    let pagesCount = Math.ceil(totalUserCount / pageSize);
-    const pages = [];
-
-    for (let i = 1; i <= pagesCount; i++) {
-      pages.push(i);
-    }
-
-    console.log(pagesCount);
+    const isFetching = this.props.props.usersData.isFetching;
 
     return (
-      <div>
-        <div className={classes.pages}>
-          {pages.map((number, index) => {
-            return (
-              <div
-                key={index}
-                className={
-                  number === currentPage
-                    ? classes.buttonSelected
-                    : classes.buttonBasic
-                }
-                onClick={(e) => {
-                  this.onChangePage(number);
-                }}
-              >
-                {number}
-              </div>
-            );
-          })}
-        </div>
-
-        {users.map((item) => {
-          return (
-            <div key={item.id}>
-              <img
-                src={
-                  item.photos.small === null
-                    ? "https://stihi.ru/pics/2013/09/01/8901.jpg"
-                    : item.photos.small
-                }
-                alt="pict"
-                className={classes.image}
-              />
-              <div>{item.name}</div>
-              <div>{item.status}</div>
-              <div>{item.uniqueUrlName}</div>
-              {item.followed ? (
-                <button
-                  onClick={() => {
-                    onUnFollowUser(item.id);
-                  }}
-                >
-                  Unfollow
-                </button>
-              ) : (
-                <button
-                  onClick={() => {
-                    onFollowUser(item.id);
-                  }}
-                >
-                  Follow
-                </button>
-              )}
-            </div>
-          );
-        })}
-      </div>
+      <>
+        {isFetching ? (
+          <Preloader />
+        ) : (
+          <Users props={this.props} onChangePage={this.onChangePage} />
+        )}
+      </>
     );
   }
 }

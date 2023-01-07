@@ -1,10 +1,11 @@
 import { connect } from "react-redux";
 import {
-  followUserAction,
-  setCurrentPageAction,
-  setTotalCountUsers,
-  setUsersAction,
-  unfollowUserAction,
+  followUser,
+  setCurrentPage,
+  setFetching,
+  setTotalCount,
+  setUsers,
+  unFollowUser,
 } from "redux/users-reducer";
 
 import { UsersClass } from "./UsersClass";
@@ -15,27 +16,35 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
+// old variant
+/* let mapDispatchToProps = (dispatch) => {
   return {
     onFollowUser: (userId) => {
-      dispatch(followUserAction(userId));
+      dispatch(followUser(userId));
     },
     onUnFollowUser: (userId) => {
-      dispatch(unfollowUserAction(userId));
+      dispatch(unfollowUser(userId));
     },
     setUsersData: (users) => {
-      dispatch(setUsersAction(users));
+      dispatch(setUsers(users));
     },
     setPage: (page) => {
-      dispatch(setCurrentPageAction(page));
+      dispatch(setCurrentPage(page));
     },
     setCount: (count) => {
-      dispatch(setTotalCountUsers(count));
+      dispatch(setTotalCount(count));
+    },
+    setFetching: (value) => {
+      dispatch(setFetching(value));
     },
   };
-};
+}; */
 
-export const UsersContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UsersClass);
+export const UsersContainer = connect(mapStateToProps, {
+  followUser,
+  unFollowUser,
+  setUsers,
+  setCurrentPage,
+  setTotalCount,
+  setFetching,
+})(UsersClass);

@@ -1,69 +1,44 @@
-import axios from "axios";
+import classes from "./Users.module.css";
 import React from "react";
 
-import classes from "./Users.module.css";
-
 export const Users = (props) => {
-  /*   const data = [
-    {
-      id: 1,
-      photo: "https://stihi.ru/pics/2013/09/01/8901.jpg",
-      name: "Dmitry",
-      followed: false,
-      location: {
-        city: "Moscow",
-        country: "Russia",
-      },
-    },
-    {
-      id: 2,
-      photo: "https://stihi.ru/pics/2013/09/01/8901.jpg",
-      name: "Maksim",
-      followed: true,
-      location: {
-        city: "Kiev",
-        country: "Ukraine",
-      },
-    },
-    {
-      id: 3,
-      photo: "https://stihi.ru/pics/2013/09/01/8901.jpg",
-      name: "Maksim",
-      followed: true,
-      location: {
-        city: "Kiev",
-        country: "Ukraine",
-      },
-    },
-  ]; */
+  const users = props.props.props.usersData.users;
+  const onFollowUser = props.props.followUser;
+  const onUnFollowUser = props.props.unFollowUser;
 
-  let users = props.props.usersData.users;
+  const pageSize = props.props.props.usersData.pageSize;
+  const totalUserCount = props.props.props.usersData.totalUserCount;
+  const currentPage = props.props.props.usersData.currentPage;
 
-  const { onFollowUser, onUnFollowUser, setUsersData } = props;
+  let pagesCount = Math.ceil(totalUserCount / pageSize);
+  const pages = [];
 
-  let getUsers = () => {
-    if (users.length === 0) {
-      axios
-        .get("https://social-network.samuraijs.com/api/1.0/users")
-        .then((response) => {
-          console.log(response);
-          setUsersData(response.data.items);
-        });
-    }
-  };
-  console.log(users);
-
-  const unFollowHandler = (userId) => {
-    onUnFollowUser(userId);
-  };
-
-  const FollowHandler = (userId) => {
-    onFollowUser(userId);
-  };
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
+  }
 
   return (
     <div>
-      {getUsers()}
+      <div className={classes.pages}>
+        {pages.map((number, index) => {
+          return (
+            <div
+              key={index}
+              className={
+                number === currentPage
+                  ? classes.buttonSelected
+                  : classes.buttonBasic
+              }
+              onClick={(e) => {
+                props.onChangePage(number);
+              }}
+            >
+              {number}
+            </div>
+          );
+        })}
+      </div>
+
       {users.map((item) => {
         return (
           <div key={item.id}>
@@ -82,7 +57,7 @@ export const Users = (props) => {
             {item.followed ? (
               <button
                 onClick={() => {
-                  unFollowHandler(item.id);
+                  onUnFollowUser(item.id);
                 }}
               >
                 Unfollow
@@ -90,7 +65,7 @@ export const Users = (props) => {
             ) : (
               <button
                 onClick={() => {
-                  FollowHandler(item.id);
+                  onFollowUser(item.id);
                 }}
               >
                 Follow

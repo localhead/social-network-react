@@ -3,6 +3,7 @@ let initialState = {
   pageSize: 5,
   totalUserCount: 1,
   currentPage: 0,
+  isFetching: false,
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -33,7 +34,6 @@ export const usersReducer = (state = initialState, action) => {
   } else if (action.type === "SET-USERS") {
     const res = { ...state, users: [...action.users] };
 
-    console.log(state);
     return res;
   } else if (action.type === "SET-PAGE") {
     const res = { ...state, currentPage: action.page };
@@ -43,41 +43,52 @@ export const usersReducer = (state = initialState, action) => {
     const res = { ...state, totalUserCount: action.count };
 
     return res;
+  } else if (action.type === "SET-FETCHING") {
+    // console.log(action.value);
+
+    return { ...state, isFetching: action.value };
   }
   return state;
 };
 
-export const followUserAction = (userId) => {
+export const followUser = (userId) => {
   return {
     type: "FOLLOW-USER",
     userId: userId,
   };
 };
 
-export const unfollowUserAction = (userId) => {
+export const unFollowUser = (userId) => {
   return {
     type: "UNFOLLOW-USER",
     userId: userId,
   };
 };
 
-export const setUsersAction = (users) => {
+export const setUsers = (users) => {
   return {
     type: "SET-USERS",
     users: users,
   };
 };
 
-export const setCurrentPageAction = (page) => {
+export const setCurrentPage = (page) => {
   return {
     type: "SET-PAGE",
     page: page,
   };
 };
 
-export const setTotalCountUsers = (count) => {
+export const setTotalCount = (count) => {
   return {
     type: "SET-USERS-COUNT",
     count: count,
+  };
+};
+
+export const setFetching = (value) => {
+  return {
+    type: "SET-FETCHING",
+    value: value,
   };
 };
