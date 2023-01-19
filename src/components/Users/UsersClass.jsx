@@ -1,4 +1,5 @@
-import axios from "axios";
+import { getAllUsersData, getUserData } from "api/DataAccessLayer";
+
 import { Preloader } from "components/common/preloader/Preloader";
 import React from "react";
 import { Users } from "./Users";
@@ -30,31 +31,22 @@ export class UsersClass extends React.Component {
     setFetching(true);
     setPage(number);
 
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${number}&count=${pageSize}`,
-        { withCredentials: true }
-      )
-      .then((response) => {
-        //console.log(response);
-        setUsersData(response.data.items);
-        setFetching(false);
-      });
+    getUserData(number, pageSize).then((data) => {
+      //console.log(response);
+      setUsersData(data.items);
+      setFetching(false);
+    });
   };
 
   getUsersCount = () => {
     const setFetching = this.props.setFetching;
     const setCount = this.props.setTotalCount;
 
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/users`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        //console.log(response);
-        setCount(Math.ceil(response.data.totalCount / 70));
-        setFetching(false);
-      });
+    getAllUsersData().then((data) => {
+      //console.log(response);
+      setCount(Math.ceil(data.totalCount / 70));
+      setFetching(false);
+    });
   };
 
   render() {
