@@ -32,9 +32,11 @@ export class UsersClass extends React.Component {
 
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${number}&count=${pageSize}`
+        `https://social-network.samuraijs.com/api/1.0/users?page=${number}&count=${pageSize}`,
+        { withCredentials: true }
       )
       .then((response) => {
+        //console.log(response);
         setUsersData(response.data.items);
         setFetching(false);
       });
@@ -45,9 +47,12 @@ export class UsersClass extends React.Component {
     const setCount = this.props.setTotalCount;
 
     axios
-      .get(`https://social-network.samuraijs.com/api/1.0/users`)
+      .get(`https://social-network.samuraijs.com/api/1.0/users`, {
+        withCredentials: true,
+      })
       .then((response) => {
-        setCount(Math.ceil(response.data.totalCount / 100));
+        //console.log(response);
+        setCount(Math.ceil(response.data.totalCount / 70));
         setFetching(false);
       });
   };

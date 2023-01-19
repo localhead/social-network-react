@@ -23,6 +23,7 @@ let initialState = {
     },
   ],
   textAreaValue: "fuck life",
+  userProfile: null,
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -50,6 +51,11 @@ export const profileReducer = (state = initialState, action) => {
 
     stateCopy.textAreaValue = action.textData;
     return stateCopy;
+  } else if (action.type === "UPDATE-PROFILE-DATA") {
+    //console.log(action.userData);
+    let userProfileStateCopy = { ...state, userProfile: action.userData };
+
+    return userProfileStateCopy;
   }
   return state;
 };
@@ -65,5 +71,12 @@ export const updateNewPostText = (text) => {
   return {
     type: "UPDATE-NEW-POST-TEXT",
     textData: text,
+  };
+};
+
+export const setUserProfile = (data) => {
+  return {
+    type: "UPDATE-PROFILE-DATA",
+    userData: data,
   };
 };

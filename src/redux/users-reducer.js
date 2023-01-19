@@ -1,6 +1,6 @@
 let initialState = {
   users: [],
-  pageSize: 5,
+  pageSize: 10,
   totalUserCount: 1,
   currentPage: 0,
   isFetching: false,
@@ -44,8 +44,6 @@ export const usersReducer = (state = initialState, action) => {
 
     return res;
   } else if (action.type === "SET-FETCHING") {
-    // console.log(action.value);
-
     return { ...state, isFetching: action.value };
   }
   return state;
