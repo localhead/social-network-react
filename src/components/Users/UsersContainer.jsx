@@ -3,6 +3,7 @@ import {
   followUser,
   setCurrentPage,
   setFetching,
+  setFetchingFollowing,
   setTotalCount,
   setUsers,
   unFollowUser,
@@ -47,4 +48,5 @@ export const UsersContainer = connect(mapStateToProps, {
   setCurrentPage,
   setTotalCount,
   setFetching,
+  setFetchingFollowing,
 })(UsersClass);

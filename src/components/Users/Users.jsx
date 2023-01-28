@@ -8,6 +8,9 @@ export const Users = (props) => {
   const onFollowUser = props.props.followUser;
   const onUnFollowUser = props.props.unFollowUser;
 
+  const setFetchingFollowing = props.props.setFetchingFollowing;
+  const isFetchingFollowing = props.props.props.usersData.isFetchingFollowing;
+
   const pageSize = props.props.props.usersData.pageSize;
   const totalUserCount = props.props.props.usersData.totalUserCount;
   const currentPage = props.props.props.usersData.currentPage;
@@ -15,14 +18,15 @@ export const Users = (props) => {
   let pagesCount = Math.ceil(totalUserCount / pageSize);
   const pages = [];
 
-  console.log(users);
-
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
 
+  //console.log("global ", props.props.props.usersData);
+
   const unFollowUserHandler = (user) => {
-    //console.log(user);
+    setFetchingFollowing(true, user.id);
+    //console.log(props.props.props.usersData.isFetchingFollowing);
     axios
       .delete(
         `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
@@ -33,15 +37,17 @@ export const Users = (props) => {
       )
       .then((response) => {
         if (response.data.resultCode !== 1) {
-          //console.log(response);
           onUnFollowUser(user.id);
-          //console.log(user);
+
+          setFetchingFollowing(false, user.id);
+          //console.log(props.props.props.usersData.isFetchingFollowing);
         }
       });
   };
 
   const followUserHandler = (user) => {
-    // console.log(user);
+    setFetchingFollowing(true, user.id);
+    //console.log(props.props.props.usersData.isFetchingFollowing);
     axios
       .post(
         `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
@@ -52,9 +58,9 @@ export const Users = (props) => {
         }
       )
       .then((response) => {
-        //console.log(response);
         onFollowUser(user.id);
-        //console.log(user);
+        setFetchingFollowing(false, user.id);
+        console.log(props.props.props.usersData.isFetchingFollowing);
       });
   };
 
@@ -100,6 +106,7 @@ export const Users = (props) => {
             <div>{item.uniqueUrlName}</div>
             {item.followed ? (
               <button
+                disabled={isFetchingFollowing.some((id) => id === item.id)}
                 className={classes.unFollowButton}
                 onClick={() => {
                   unFollowUserHandler(item);
@@ -109,6 +116,7 @@ export const Users = (props) => {
               </button>
             ) : (
               <button
+                disabled={isFetchingFollowing.some((id) => id === item.id)}
                 className={classes.FollowButton}
                 onClick={() => {
                   followUserHandler(item);

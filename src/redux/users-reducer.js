@@ -4,6 +4,7 @@ let initialState = {
   totalUserCount: 1,
   currentPage: 0,
   isFetching: false,
+  isFetchingFollowing: [],
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -45,6 +46,13 @@ export const usersReducer = (state = initialState, action) => {
     return res;
   } else if (action.type === "SET-FETCHING") {
     return { ...state, isFetching: action.value };
+  } else if (action.type === "SET-FETCHING-FOLLOWING") {
+    return {
+      ...state,
+      isFetchingFollowing: action.isFetching
+        ? [...state.isFetchingFollowing, action.userId]
+        : state.isFetchingFollowing.filter((id) => id !== action.userId),
+    };
   }
   return state;
 };
@@ -88,5 +96,14 @@ export const setFetching = (value) => {
   return {
     type: "SET-FETCHING",
     value: value,
+  };
+};
+
+export const setFetchingFollowing = (userId, isFetching) => {
+  return {
+    type: "SET-FETCHING-FOLLOWING",
+
+    userId: userId,
+    isFetching: isFetching,
   };
 };
