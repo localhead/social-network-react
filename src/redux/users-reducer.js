@@ -1,3 +1,5 @@
+import { usersAPI } from "api/DataAccessLayer";
+
 let initialState = {
   users: [],
   pageSize: 10,
@@ -49,6 +51,7 @@ export const usersReducer = (state = initialState, action) => {
   } else if (action.type === "SET-FETCHING-FOLLOWING") {
     return {
       ...state,
+
       isFetchingFollowing: action.isFetching
         ? [...state.isFetchingFollowing, action.userId]
         : state.isFetchingFollowing.filter((id) => id !== action.userId),
@@ -57,14 +60,14 @@ export const usersReducer = (state = initialState, action) => {
   return state;
 };
 
-export const followUser = (userId) => {
+export const setFollowUser = (userId) => {
   return {
     type: "FOLLOW-USER",
     userId: userId,
   };
 };
 
-export const unFollowUser = (userId) => {
+export const setUnFollowUser = (userId) => {
   return {
     type: "UNFOLLOW-USER",
     userId: userId,
@@ -105,5 +108,58 @@ export const setFetchingFollowing = (userId, isFetching) => {
 
     userId: userId,
     isFetching: isFetching,
+  };
+};
+/* 
+
+
+
+*/
+// Thunks
+export const getUsersOnPageThunk = (number, pageSize) => {
+  return (dispatch) => {
+    dispatch(setFetching(true));
+    dispatch(setCurrentPage(number));
+
+    usersAPI.getUsersData(number, pageSize).then((data) => {
+      dispatch(setUsers(data.items));
+      dispatch(setFetching(false));
+    });
+  };
+};
+
+export const getTotalUsersCountThunk = () => {
+  return (dispatch) => {
+    usersAPI.getAllUsersData().then((data) => {
+      //console.log(response);
+      dispatch(setTotalCount(Math.ceil(data.totalCount / 70)));
+      dispatch(setFetching(false));
+    });
+  };
+};
+
+export const followUserThunk = (userId) => {
+  return (dispatch) => {
+    dispatch(setFetchingFollowing(true, userId));
+
+    usersAPI.followUser(userId).then((response) => {
+      if (response.data.resultCode !== 1) {
+        dispatch(setFollowUser(userId));
+        dispatch(setFetchingFollowing(false, userId));
+      }
+    });
+  };
+};
+
+export const unFollowUserThunk = (userId) => {
+  return (dispatch) => {
+    dispatch(setFetchingFollowing(true, userId));
+
+    usersAPI.unFollowUser(userId).then((response) => {
+      if (response.data.resultCode !== 1) {
+        dispatch(setUnFollowUser(userId));
+        dispatch(setFetchingFollowing(false, userId));
+      }
+    });
   };
 };

@@ -1,19 +1,10 @@
 import classes from "./Users.module.css";
 import React from "react";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
 
 export const Users = (props) => {
-  const users = props.props.props.usersData.users;
-  const onFollowUser = props.props.followUser;
-  const onUnFollowUser = props.props.unFollowUser;
-
-  const setFetchingFollowing = props.props.setFetchingFollowing;
-  const isFetchingFollowing = props.props.props.usersData.isFetchingFollowing;
-
-  const pageSize = props.props.props.usersData.pageSize;
-  const totalUserCount = props.props.props.usersData.totalUserCount;
-  const currentPage = props.props.props.usersData.currentPage;
+  const { users, isFetchingFollowing, pageSize, totalUserCount, currentPage } =
+    props;
 
   let pagesCount = Math.ceil(totalUserCount / pageSize);
   const pages = [];
@@ -22,46 +13,14 @@ export const Users = (props) => {
     pages.push(i);
   }
 
-  //console.log("global ", props.props.props.usersData);
+  //console.log("global ", isFetchingFollowing);
 
-  const unFollowUserHandler = (user) => {
-    setFetchingFollowing(true, user.id);
-    //console.log(props.props.props.usersData.isFetchingFollowing);
-    axios
-      .delete(
-        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-        {
-          withCredentials: true,
-          headers: { "API-KEY": "68779c10-1e15-43dd-9b4e-dfae49a44d16" },
-        }
-      )
-      .then((response) => {
-        if (response.data.resultCode !== 1) {
-          onUnFollowUser(user.id);
-
-          setFetchingFollowing(false, user.id);
-          //console.log(props.props.props.usersData.isFetchingFollowing);
-        }
-      });
+  const followUserHandler = (userId) => {
+    props.onFollowUser(userId);
   };
 
-  const followUserHandler = (user) => {
-    setFetchingFollowing(true, user.id);
-    //console.log(props.props.props.usersData.isFetchingFollowing);
-    axios
-      .post(
-        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-        {},
-        {
-          withCredentials: true,
-          headers: { "API-KEY": "68779c10-1e15-43dd-9b4e-dfae49a44d16" },
-        }
-      )
-      .then((response) => {
-        onFollowUser(user.id);
-        setFetchingFollowing(false, user.id);
-        console.log(props.props.props.usersData.isFetchingFollowing);
-      });
+  const UnFollowUserHandler = (userId) => {
+    props.onUnFollowUser(userId);
   };
 
   return (
@@ -109,7 +68,7 @@ export const Users = (props) => {
                 disabled={isFetchingFollowing.some((id) => id === item.id)}
                 className={classes.unFollowButton}
                 onClick={() => {
-                  unFollowUserHandler(item);
+                  UnFollowUserHandler(item.id);
                 }}
               >
                 Unfollow
@@ -119,7 +78,7 @@ export const Users = (props) => {
                 disabled={isFetchingFollowing.some((id) => id === item.id)}
                 className={classes.FollowButton}
                 onClick={() => {
-                  followUserHandler(item);
+                  followUserHandler(item.id);
                 }}
               >
                 Follow

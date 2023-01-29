@@ -77,9 +77,9 @@ export const Navbar = (props) => {
       <div className={classes.friendsList}>
         <div className={classes.friendsListTitle}>Friends</div>
         <ul className={classes.friendsListItems}>
-          {friendsData.map((item) => {
+          {friendsData.map((item, index) => {
             return (
-              <li key={friendsData.id} className={classes.friendsListItem}>
+              <li key={index} className={classes.friendsListItem}>
                 <img
                   className={classes.friendsListPhoto}
                   src={item.photo}

@@ -8,9 +8,9 @@ import React from "react";
 import { DialogsContainer } from "components/Dialogs/DialogsContainer";
 import { NavbarContainer } from "components/Navbar/NavbarContainer";
 
-import { UsersContainer } from "components/Users/UsersContainer";
-import { ProfileContainer } from "components/Profile/ProfileContainer";
 import HeaderContainer from "components/Header/HeaderContainer";
+import { UsersConnecter } from "components/Users/UsersContainer";
+import { ProfileConnecter } from "components/Profile/ProfileContainer";
 
 // What is component?
 // Component is a function which always returns JSX razmetku
@@ -27,9 +27,9 @@ const App = () => {
         <NavbarContainer />
         <div className="app-wrapper__content">
           <Routes>
-            <Route path="/profile" element={<ProfileContainer />} />
+            <Route path="/profile" element={<ProfileConnecter />} />
             <Route path="/dialogs" element={<DialogsContainer />} />
-            <Route path="/users" element={<UsersContainer />} />
+            <Route path="/users" element={<UsersConnecter />} />
           </Routes>
         </div>
       </div>

@@ -1,3 +1,5 @@
+import { profileAPI } from "api/DataAccessLayer";
+
 let initialState = {
   postsData: [
     {
@@ -78,5 +80,20 @@ export const setUserProfile = (data) => {
   return {
     type: "UPDATE-PROFILE-DATA",
     userData: data,
+  };
+};
+
+/* 
+
+
+
+
+*/
+// Thunks
+export const getProfileDataThunk = (userId = 8) => {
+  return (dispatch) => {
+    profileAPI.setProfileData(userId).then((response) => {
+      dispatch(setUserProfile(response.data));
+    });
   };
 };

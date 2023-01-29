@@ -1,3 +1,5 @@
+import { usersAPI } from "api/DataAccessLayer";
+
 let initialState = {
   id: null,
   email: null,
@@ -20,10 +22,18 @@ export const authUserData = (userData) => {
     userData: userData,
   };
 };
+/* 
 
-export const setFetching = (value) => {
-  return {
-    type: "SET-FETCHING",
-    value: value,
+
+
+*/
+export const getAuthUserThunk = (authStatus) => {
+  return (dispatch) => {
+    usersAPI.getUserAuthInfo().then((response) => {
+      const userData = response.data.data;
+      //console.log("Current user info: ", userData);
+
+      !authStatus && dispatch(authUserData(userData));
+    });
   };
 };
