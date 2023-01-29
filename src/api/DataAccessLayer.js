@@ -23,11 +23,7 @@ export const usersAPI = {
       return response.data;
     });
   },
-  getUserAuthInfo() {
-    return instance.get(`auth/me`).then((response) => {
-      return response;
-    });
-  },
+
   followUser(userId) {
     return instance.post(`follow/${userId}`).then((response) => {
       return response;
@@ -42,6 +38,18 @@ export const usersAPI = {
 /* 
 
 
+
+
+
+*/
+export const authAPI = {
+  getUserAuthInfo() {
+    return instance.get(`auth/me`).then((response) => {
+      return response;
+    });
+  },
+};
+/* 
 
 
 

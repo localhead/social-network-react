@@ -1,4 +1,4 @@
-import { usersAPI } from "api/DataAccessLayer";
+import { authAPI } from "api/DataAccessLayer";
 
 let initialState = {
   id: null,
@@ -29,7 +29,7 @@ export const authUserData = (userData) => {
 */
 export const getAuthUserThunk = (authStatus) => {
   return (dispatch) => {
-    usersAPI.getUserAuthInfo().then((response) => {
+    authAPI.getUserAuthInfo().then((response) => {
       const userData = response.data.data;
       //console.log("Current user info: ", userData);
 

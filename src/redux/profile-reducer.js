@@ -54,7 +54,7 @@ export const profileReducer = (state = initialState, action) => {
     stateCopy.textAreaValue = action.textData;
     return stateCopy;
   } else if (action.type === "UPDATE-PROFILE-DATA") {
-    //console.log(action.userData);
+    console.log(action.userData);
     let userProfileStateCopy = { ...state, userProfile: action.userData };
 
     return userProfileStateCopy;

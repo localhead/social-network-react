@@ -8,7 +8,11 @@ export const Header = function (props) {
   return (
     <header className={classes.header}>
       <img src={logo} className={classes.logo} alt="logo"></img>
-      <button className={classes["login-btn"]}>{props.login}</button>
+      {props.login ? (
+        <div>{props.login}</div>
+      ) : (
+        <button className={classes["login-btn"]}>войти</button>
+      )}
     </header>
   );
 };
