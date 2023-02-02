@@ -15,6 +15,9 @@ import {
   followUserThunk,
   unFollowUserThunk,
 } from "redux/users-reducer";
+import { Navigate } from "react-router-dom";
+import { withAuthRedirect } from "highOrderComponents/withAuthRedirect";
+import { compose } from "redux";
 
 export class UsersContainer extends React.Component {
   /*   constructor(props) {
@@ -32,6 +35,7 @@ export class UsersContainer extends React.Component {
 
     this.props.getTotalUsersCountThunk();
     this.onChangePage();
+    console.log();
   }
 
   onChangePage = (number = 1) => {
@@ -51,9 +55,11 @@ export class UsersContainer extends React.Component {
     const isFetching = this.props.props.usersData.isFetching;
     const userDataProps = this.props.props.usersData;
     const setFetchingFollowing = this.props.setFetchingFollowing;
+    const isAuthorized = this.props.props.authData.isAuthorized;
 
     return (
       <>
+        {!isAuthorized && <Navigate to="/login" />}
         {isFetching ? (
           <Preloader />
         ) : (
@@ -76,19 +82,44 @@ let mapStateToProps = (state) => {
   };
 };
 
-export const UsersConnecter = connect(mapStateToProps, {
-  setUsers,
-  setCurrentPage,
-  setTotalCount,
-  setFetching,
-  setFetchingFollowing,
-  getUsersOnPageThunk,
-  getTotalUsersCountThunk,
-  followUserThunk,
-  unFollowUserThunk,
-})(UsersContainer);
+// with compose:
+export default compose(
+  withAuthRedirect,
+  connect(mapStateToProps, {
+    setUsers,
+    setCurrentPage,
+    setTotalCount,
+    setFetching,
+    setFetchingFollowing,
+    getUsersOnPageThunk,
+    getTotalUsersCountThunk,
+    followUserThunk,
+    unFollowUserThunk,
+  })
+)(UsersContainer);
 
-// old variant
+// without compose:
+// let AuthRedirectContainer = withAuthRedirect(UsersContainer);
+// export const UsersConnecter = connect(mapStateToProps, {
+//   setUsers,
+//   setCurrentPage,
+//   setTotalCount,
+//   setFetching,
+//   setFetchingFollowing,
+//   getUsersOnPageThunk,
+//   getTotalUsersCountThunk,
+//   followUserThunk,
+//   unFollowUserThunk,
+// })(AuthRedirectContainer);
+/* 
+
+
+
+
+
+
+*/
+// old variant of mapDispatchToProps
 /* let mapDispatchToProps = (dispatch) => {
   return {
     onFollowUser: (userId) => {

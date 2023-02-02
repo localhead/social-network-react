@@ -9,11 +9,10 @@ let initialState = {
 
 export const authReducer = (state = initialState, action) => {
   if (action.type === "SET-USER-LOGIN-DATA") {
-    const resultState = { ...state, ...action.userData, isAuthorized: true };
-    return resultState;
-  }
-
-  return state;
+    //console.log(state.isAuthorized);
+    const stateCopy = { ...action.userData, isAuthorized: true };
+    return stateCopy;
+  } else return state;
 };
 
 export const authUserData = (userData) => {
@@ -27,13 +26,14 @@ export const authUserData = (userData) => {
 
 
 */
-export const getAuthUserThunk = (authStatus) => {
+export const getAuthUserThunk = () => {
   return (dispatch) => {
     authAPI.getUserAuthInfo().then((response) => {
       const userData = response.data.data;
-      //console.log("Current user info: ", userData);
+      console.log(response.data.resultCode);
+      console.log("Current user info: ", userData);
 
-      !authStatus && dispatch(authUserData(userData));
+      response.data.resultCode === 0 && dispatch(authUserData(userData));
     });
   };
 };

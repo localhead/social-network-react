@@ -1,4 +1,6 @@
+import { withAuthRedirect } from "highOrderComponents/withAuthRedirect";
 import { connect } from "react-redux";
+import { getAuthUserThunk } from "redux/auth-reducer";
 
 import { addMessageToDialog, updateMessageText } from "redux/dialogs-reducer";
 import { Dialogs } from "./Dialogs";
@@ -37,10 +39,15 @@ let mapDispatchToProps = (dispatch) => {
     onSendMessage: (text) => {
       dispatch(addMessageToDialog(text));
     },
+    authorize: () => {
+      dispatch(getAuthUserThunk());
+    },
   };
 };
+
+let AuthRedirectContainer = withAuthRedirect(Dialogs);
 
 export const DialogsContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Dialogs);
+)(AuthRedirectContainer);

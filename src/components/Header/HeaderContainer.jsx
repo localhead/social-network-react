@@ -5,9 +5,7 @@ import { authUserData, getAuthUserThunk } from "redux/auth-reducer";
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
-    const authStatus = this.props.props.isAuthorized;
-
-    this.props.getAuthUserThunk(authStatus);
+    this.props.getAuthUserThunk();
   }
 
   render() {
