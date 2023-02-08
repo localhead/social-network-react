@@ -19,7 +19,7 @@ export class ProfileContainer extends React.Component {
     this.props.getProfileDataThunk(userId ? userId : 2);
   }
 
-  //console.log(state.authData.isAuthorized);
+  //console.log(state.authDa ta.isAuthorized);
 
   render() {
     //console.log(isAuthorized);

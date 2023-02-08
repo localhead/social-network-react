@@ -14,8 +14,7 @@ import { ProfileConnecter } from "components/Profile/ProfileContainer";
 import { Login } from "components/Login/Login";
 
 // What is component?
-// Component is a function which always returns JSX razmetku
-
+// Component is a function which always returns JSX
 // App - is a component. And Component is a TAG
 
 const App = () => {
