@@ -1,4 +1,4 @@
-import { usersAPI } from "api/DataAccessLayer";
+import { usersAPI } from "api/API";
 
 let initialState = {
   users: [],

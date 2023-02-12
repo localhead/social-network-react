@@ -16,19 +16,10 @@ import {
   unFollowUserThunk,
 } from "redux/users-reducer";
 import { Navigate } from "react-router-dom";
-import { withAuthRedirect } from "highOrderComponents/withAuthRedirect";
+import { withAuthRedirect } from "components/highOrder/withAuthRedirect";
 import { compose } from "redux";
 
 export class UsersContainer extends React.Component {
-  /*   constructor(props) {
-    super(props);
-
-    this.onFollowUser = props.onFollowUser;
-    this.onUnFollowUser = props.onUnFollowUser;
-    this.setUsersData = props.setUsersData;
-    this.users = props.props.usersData.users;
-  } */
-
   componentDidMount() {
     const setFetching = this.props.setFetching;
     setFetching(true);

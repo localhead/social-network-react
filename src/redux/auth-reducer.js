@@ -1,4 +1,4 @@
-import { authAPI } from "api/DataAccessLayer";
+import { authAPI } from "api/API";
 
 let initialState = {
   id: null,

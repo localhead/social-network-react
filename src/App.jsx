@@ -1,17 +1,18 @@
-import "./App.css";
-
 // Installing package for routing
 // npm install react-router-dom -save
 // -save will update json with this package
 import { Routes, Route } from "react-router-dom";
 import React from "react";
-import { DialogsContainer } from "components/Dialogs/DialogsContainer";
-import { NavbarContainer } from "components/Navbar/NavbarContainer";
+import { DialogsContainer } from "components/inner/Dialogs/DialogsContainer";
+import { NavbarContainer } from "components/fixed/Navbar/NavbarContainer";
 
-import HeaderContainer from "components/Header/HeaderContainer";
-import UsersContainer from "components/Users/UsersContainer";
-import { ProfileConnecter } from "components/Profile/ProfileContainer";
-import { Login } from "components/Login/Login";
+import HeaderContainer from "components/fixed/Header/HeaderContainer";
+import UsersContainer from "components/inner/Users/UsersContainer";
+
+import { Login } from "components/inner/Login/Login";
+import { GlobalStyle } from "utils/GlobalStyled";
+import { StyledAppInnerWrapper, StyledAppWrapper } from "StyledApp";
+import { ProfileConnecter } from "components/inner/Profile/ProfileContainer";
 
 // What is component?
 // Component is a function which always returns JSX
@@ -22,10 +23,11 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="app-wrapper">
+      <GlobalStyle />
+      <StyledAppWrapper>
         <HeaderContainer />
         <NavbarContainer />
-        <div className="app-wrapper__content">
+        <StyledAppInnerWrapper>
           <Routes>
             <Route path="/profile" element={<ProfileConnecter />}>
               <Route path=":id" element={<ProfileConnecter />} />
@@ -34,8 +36,8 @@ const App = () => {
             <Route path="/users" element={<UsersContainer />} />
             <Route path="/login" element={<Login />} />
           </Routes>
-        </div>
-      </div>
+        </StyledAppInnerWrapper>
+      </StyledAppWrapper>
     </div>
   );
 };

@@ -9,14 +9,14 @@ class HeaderContainer extends React.Component {
   }
 
   render() {
-    return <Header {...this.props.props} />;
+    return <Header {...this.props.authData} />;
   }
 }
 
 // Container + Class in one file. All in one
 let mapStateToProps = (state) => {
   return {
-    props: state.authData,
+    authData: state.authData,
   };
 };
 

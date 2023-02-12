@@ -1,6 +1,6 @@
 import { Preloader } from "components/common/preloader/Preloader";
 import React from "react";
-import wallpaper from "../../../assets/img/wallpaper1.jpg";
+import wallpaper from "../../../../assets/img/wallpaper1.jpg";
 import { ProfileStatus } from "../ProfileStatus/ProfileStatus";
 
 import classes from "./ProfileInfo.module.css";

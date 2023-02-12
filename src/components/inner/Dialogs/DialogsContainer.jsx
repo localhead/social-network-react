@@ -1,4 +1,4 @@
-import { withAuthRedirect } from "highOrderComponents/withAuthRedirect";
+import { withAuthRedirect } from "components/highOrder/withAuthRedirect";
 import { connect } from "react-redux";
 import { getAuthUserThunk } from "redux/auth-reducer";
 

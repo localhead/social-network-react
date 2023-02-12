@@ -10,7 +10,7 @@ import {
 // This import from router dom allows us to get data from browser URL
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import { withAuthRedirect } from "highOrderComponents/withAuthRedirect";
+import { withAuthRedirect } from "components/highOrder/withAuthRedirect";
 
 export class ProfileContainer extends React.Component {
   componentDidMount() {

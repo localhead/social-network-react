@@ -4,7 +4,8 @@ import { Navbar } from "./Navbar";
 
 let mapStateToProps = (state) => {
   return {
-    props: state,
+    friendsData: state.sidebarData.friendsData,
+    navigationLinks: state.sidebarData.navigationLinks,
   };
 };
 

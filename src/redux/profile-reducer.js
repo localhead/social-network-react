@@ -1,4 +1,4 @@
-import { profileAPI } from "api/DataAccessLayer";
+import { profileAPI } from "api/API";
 
 let initialState = {
   postsData: [
@@ -107,7 +107,7 @@ export const setAuthUserStatus = (statusText) => {
 
 */
 // Thunks
-export const getProfileDataThunk = (userId = 8) => {
+export const getProfileDataThunk = (userId) => {
   return (dispatch) => {
     profileAPI.setProfileData(userId).then((response) => {
       dispatch(setUserProfile(response.data));

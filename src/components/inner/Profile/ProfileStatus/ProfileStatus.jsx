@@ -21,8 +21,16 @@ export class ProfileStatus extends React.Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    // this method is called every time rerender Happens in this class component
+    if (prevProps.profileStatus !== prevState.status) {
+      this.setState({
+        status: this.props.profileStatus,
+      });
+    }
+  }
+
   deactivateStatusEdit() {
-    // setState - method which has React.Component
     this.setState({
       editMode: false,
     });

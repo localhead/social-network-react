@@ -1,17 +1,19 @@
-.header {
-  background-color: aquamarine;
+import styled from "styled-components";
+
+export const StyledHeader = styled.div`
+  background-color: #cbcfff;
   grid-area: h;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+`;
 
-.logo {
+export const StyledLogo = styled.img`
   object-fit: contain;
   width: 80px;
-}
+`;
 
-.login-btn {
+export const StyledButton = styled.button`
   border: none;
   cursor: pointer;
   color: black;
@@ -21,10 +23,10 @@
   padding: 5px 15px;
   margin: 0;
   border-radius: 5px;
-}
 
-.login-btn:hover {
-  transition: 0.3s all;
-  background-color: rgb(72, 72, 72);
-  color: white;
-}
+  :hover {
+    transition: 0.3s all;
+    background-color: rgb(72, 72, 72);
+    color: white;
+  }
+`;

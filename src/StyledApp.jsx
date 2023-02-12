@@ -1,9 +1,6 @@
-html {
-  margin: 0px;
-  padding: 0px;
-}
+import styled from "styled-components";
 
-.app-wrapper {
+export const StyledAppWrapper = styled.div`
   margin: 0 auto;
   width: 1200px;
   display: grid;
@@ -14,8 +11,8 @@ html {
 
   grid-template-columns: 2fr 10fr;
   grid-template-rows: 60px 2fr;
-}
+`;
 
-.app-wrapper__content {
+export const StyledAppInnerWrapper = styled.div`
   grid-area: d;
-}
+`;
