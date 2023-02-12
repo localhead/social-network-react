@@ -1,7 +1,11 @@
 import React from "react";
 import { Profile } from "./Profile";
 import { connect } from "react-redux";
-import { getProfileDataThunk } from "redux/profile-reducer";
+import {
+  getProfileDataThunk,
+  getUserStatusThunk,
+  setAuthUserStatusThunk,
+} from "redux/profile-reducer";
 
 // This import from router dom allows us to get data from browser URL
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -10,22 +14,44 @@ import { withAuthRedirect } from "highOrderComponents/withAuthRedirect";
 
 export class ProfileContainer extends React.Component {
   componentDidMount() {
+    this.getUserStatus();
     this.getUserProfile();
   }
 
   getUserProfile() {
-    //console.log(this.props.router.params.id);
-    let userId = this.props.router.params.id;
-    this.props.getProfileDataThunk(userId ? userId : 2);
+    let authUserId = this.props.props.authData.id;
+    let userId = Number(this.props.router.params.id);
+
+    this.props.getProfileDataThunk(
+      userId ? userId : authUserId ? authUserId : 2
+    );
   }
 
-  //console.log(state.authDa ta.isAuthorized);
+  setAuthUserStatus(statusText) {
+    this.props.setAuthUserStatusThunk(statusText);
+  }
+
+  // this method changes global state
+  getUserStatus() {
+    let authUserId = this.props.props.authData.id;
+    let userId = Number(this.props.router.params.id);
+
+    this.props.getUserStatusThunk(
+      userId ? userId : authUserId ? authUserId : 2
+    );
+  }
+
+  //console.log(state.authData.isAuthorized);
 
   render() {
-    //console.log(isAuthorized);
+    //console.log(this.props.props.profilePage);
     return (
       <>
-        <Profile props={this.props} />
+        <Profile
+          {...this.props.props}
+          getUserStatus={this.getUserStatus.bind(this)}
+          setUserStatus={this.setAuthUserStatus.bind(this)}
+        />
       </>
     );
   }
@@ -33,11 +59,11 @@ export class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    props: state,
+    state,
   };
 };
 
-// with compose:
+// with compose: ----------
 
 // without compose:
 // This function will provide us with some extra info about URL. We will be able to get userID from it
@@ -56,8 +82,11 @@ function withRouter(Component) {
 
 // HOC for redirection. Container for Container. HOC is a thing which takes NODEs and returns Other Node
 let AuthRedirectContainer = withAuthRedirect(ProfileContainer);
+
 export const ProfileConnecter = connect(mapStateToProps, {
   getProfileDataThunk,
+  getUserStatusThunk,
+  setAuthUserStatusThunk,
 })(withRouter(AuthRedirectContainer));
 /* 
 

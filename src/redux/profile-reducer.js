@@ -26,6 +26,7 @@ let initialState = {
   ],
   textAreaValue: "fuck life",
   userProfile: null,
+  userStatus: "init",
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -55,9 +56,11 @@ export const profileReducer = (state = initialState, action) => {
     return stateCopy;
   } else if (action.type === "UPDATE-PROFILE-DATA") {
     //console.log(action.userData);
-    let userProfileStateCopy = { ...state, userProfile: action.userData };
-
-    return userProfileStateCopy;
+    return { ...state, userProfile: action.userData };
+  } else if (action.type === "GET-USER-STATUS") {
+    let stateCopy = { ...state, userStatus: action.status };
+    return stateCopy;
+  } else if (action.type === "SET-AUTH-USER-STATUS") {
   }
   return state;
 };
@@ -83,6 +86,20 @@ export const setUserProfile = (data) => {
   };
 };
 
+export const getUserStatus = (status) => {
+  return {
+    type: "GET-USER-STATUS",
+    status: status,
+  };
+};
+
+export const setAuthUserStatus = (statusText) => {
+  return {
+    type: "SET-AUTH-USER-STATUS",
+    statusText: statusText,
+  };
+};
+
 /* 
 
 
@@ -94,6 +111,22 @@ export const getProfileDataThunk = (userId = 8) => {
   return (dispatch) => {
     profileAPI.setProfileData(userId).then((response) => {
       dispatch(setUserProfile(response.data));
+    });
+  };
+};
+
+export const getUserStatusThunk = (userId) => {
+  return (dispatch) => {
+    profileAPI.getUserStatus(userId).then((response) => {
+      dispatch(getUserStatus(response.data));
+    });
+  };
+};
+
+export const setAuthUserStatusThunk = (statusText) => {
+  return (dispatch) => {
+    profileAPI.setAuthUserStatusAPI(statusText).then((response) => {
+      dispatch(setAuthUserStatus(response.data));
     });
   };
 };

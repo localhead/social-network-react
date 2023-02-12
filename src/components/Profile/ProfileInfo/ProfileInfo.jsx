@@ -23,7 +23,12 @@ export const ProfileInfo = (props) => {
             alt="avatar"
           ></img>
           <div>{profileData.fullName}</div>
-          <ProfileStatus {...profileData} />
+          <ProfileStatus
+            {...profileData}
+            setUserStatus={props.setUserStatus}
+            getUserStatus={props.getUserStatus}
+            profileStatus={props.profileStatus}
+          />
         </div>
       ) : (
         <Preloader />
