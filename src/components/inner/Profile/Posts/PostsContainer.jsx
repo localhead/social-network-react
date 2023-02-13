@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { addPostActionCreator, updateNewPostText } from "redux/profile-reducer";
-import { MyPosts } from "./MyPosts";
+import { Posts } from "./Posts";
 
 /* export const MyPostsContainer = (props) => {
   const { postsData, dispatch, textAreaValue } = props;
@@ -40,7 +40,7 @@ let mapDispatchToProps = (dispatch) => {
   };
 };
 
-export const MyPostsContainer = connect(
+export const PostsContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(MyPosts);
+)(Posts);

@@ -8,6 +8,8 @@ import { dialogsReducer } from "./dialogs-reducer";
 import { profileReducer } from "./profile-reducer";
 import { sidebarReducer } from "./sidebar-reducer";
 import { usersReducer } from "./users-reducer";
+import { reducer as formReducer } from "redux-form";
+
 import ThunkMiddleware from "redux-thunk";
 
 export let reducers = combineReducers({
@@ -16,6 +18,7 @@ export let reducers = combineReducers({
   sidebarData: sidebarReducer,
   usersData: usersReducer,
   authData: authReducer,
+  form: formReducer,
 });
 
 // applyMiddleware(ThunkMiddleware) - allows us to use thunks

@@ -1,9 +1,8 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-import { MyPostsContainer } from "./MyPosts/MyPostsContainer";
+import { PostsContainer } from "./Posts/PostsContainer";
 
-import classes from "./Profile.module.css";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 
 export const Profile = (props) => {
@@ -18,14 +17,14 @@ export const Profile = (props) => {
   !isAuthorized && <Navigate to="/login" />;
 
   return (
-    <div className={classes.content}>
+    <>
       <ProfileInfo
         props={profileData}
         profileStatus={profileStatus}
         setUserStatus={setUserStatus}
         getUserStatus={getUserStatus}
       />
-      <MyPostsContainer />
-    </div>
+      <PostsContainer />
+    </>
   );
 };

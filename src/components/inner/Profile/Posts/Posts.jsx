@@ -1,9 +1,9 @@
 import React from "react";
 
-import classes from "./MyPosts.module.css";
+import classes from "./Posts.module.css";
 import { Post } from "./Post/Post";
 
-export const MyPosts = (props) => {
+export const Posts = (props) => {
   const { postsData, textAreaValue } = props.props.profilePage;
 
   const { addPostHandler, postChangeHandler } = props;

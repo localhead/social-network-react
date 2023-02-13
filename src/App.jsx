@@ -9,10 +9,10 @@ import { NavbarContainer } from "components/fixed/Navbar/NavbarContainer";
 import HeaderContainer from "components/fixed/Header/HeaderContainer";
 import UsersContainer from "components/inner/Users/UsersContainer";
 
-import { Login } from "components/inner/Login/Login";
-import { GlobalStyle } from "utils/GlobalStyled";
+import { GlobalStyle } from "utils/GlobalStyles";
 import { StyledAppInnerWrapper, StyledAppWrapper } from "StyledApp";
 import { ProfileConnecter } from "components/inner/Profile/ProfileContainer";
+import { LoginConnecter } from "components/inner/Login/LoginConnecter";
 
 // What is component?
 // Component is a function which always returns JSX
@@ -34,7 +34,7 @@ const App = () => {
             </Route>
             <Route path="/dialogs" element={<DialogsContainer />} />
             <Route path="/users" element={<UsersContainer />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<LoginConnecter />} />
           </Routes>
         </StyledAppInnerWrapper>
       </StyledAppWrapper>
