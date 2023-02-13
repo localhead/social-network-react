@@ -1,10 +1,14 @@
 import React from "react";
 
-import { DialogItem } from "./DialogItem";
-import { MessageItem } from "./MessageItem";
-
-import classes from "./Dialogs.module.css";
 import { Navigate } from "react-router-dom";
+import {
+  StyledDialogsWrapper,
+  StyledMessage,
+  StyledMessages,
+  StyledSendMessageForm,
+  StyledUserProfileDialog,
+  StyledUsersList,
+} from "./StyledDialogs";
 
 export const Dialogs = (props) => {
   const { messagesData, dialogsData, messageTextArea } =
@@ -30,28 +34,32 @@ export const Dialogs = (props) => {
   return (
     <>
       {!isAuthorized && <Navigate to="/login" />}
-      <div className={classes.dialogs}>
-        <div className={classes["users-list"]}>
+      <StyledDialogsWrapper>
+        <StyledUsersList>
           {dialogsData.map((item) => {
-            return <DialogItem key={item.id} name={item.name} />;
+            return (
+              <StyledUserProfileDialog to={"/dialogs/" + item.id} key={item.id}>
+                {item.name}
+              </StyledUserProfileDialog>
+            );
           })}
-        </div>
+        </StyledUsersList>
 
-        <div className={classes.messages}>
+        <StyledMessages>
           {messagesData.map((item) => {
-            return <MessageItem key={item.id} message={item.message} />;
+            return <StyledMessage key={item.id}>{item.message}</StyledMessage>;
           })}
-        </div>
+        </StyledMessages>
 
-        <div className={classes["send-message-content"]}>
+        <StyledSendMessageForm>
           <textarea
             ref={sendMessageLink}
             onChange={onMessageChangeInner}
             value={messageTextArea}
           ></textarea>
           <button onClick={sendMessageHandlerInner}>Send Message</button>
-        </div>
-      </div>
+        </StyledSendMessageForm>
+      </StyledDialogsWrapper>
     </>
   );
 };
