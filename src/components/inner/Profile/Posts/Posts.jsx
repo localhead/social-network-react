@@ -1,38 +1,22 @@
 import React from "react";
 
-import classes from "./Posts.module.css";
 import { Post } from "./Post/Post";
+import { AddPost } from "../AddPost/AddPost";
+import { StyledPosts } from "./StyledPosts";
 
 export const Posts = (props) => {
-  const { postsData, textAreaValue } = props.props.profilePage;
+  const { postsData } = props.props.profilePage;
 
-  const { addPostHandler, postChangeHandler } = props;
+  const { addPostHandler } = props;
 
-  const newPostTextArea = React.createRef();
-
-  const addPostHandlerInner = () => {
-    const text = textAreaValue;
-
-    addPostHandler(text);
-  };
-
-  const postChangeHandlerInner = () => {
-    const text = newPostTextArea.current.value;
-    postChangeHandler(text);
+  const addPostHandlerInner = (formData) => {
+    // console.log(formData.postText);
+    addPostHandler(formData.postText);
   };
 
   return (
-    <div className={classes.content}>
-      <div>
-        <textarea
-          ref={newPostTextArea}
-          onChange={postChangeHandlerInner}
-          value={textAreaValue}
-        />
-      </div>
-      <div>
-        <button onClick={addPostHandlerInner}>Add Post</button>
-      </div>
+    <StyledPosts>
+      <AddPost onSubmit={addPostHandlerInner} />
 
       {postsData.map((item) => {
         return (
@@ -44,6 +28,6 @@ export const Posts = (props) => {
           />
         );
       })}
-    </div>
+    </StyledPosts>
   );
 };

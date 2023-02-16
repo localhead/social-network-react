@@ -3,36 +3,33 @@ import React from "react";
 import wallpaper from "../../../../assets/img/wallpaper1.jpg";
 import { ProfileStatus } from "../ProfileStatus/ProfileStatus";
 
-import classes from "./ProfileInfo.module.css";
+import {
+  StyledAvatar,
+  StyledBannerImage,
+  StyledProfileInfoWrapper,
+  StyledProfileName,
+} from "./StyledProfileInfo";
 
 export const ProfileInfo = (props) => {
   const profileData = props.props;
 
   return (
-    <div>
+    <>
       {profileData !== null ? (
-        <div>
-          <img
-            className={classes.wallpaper}
-            src={wallpaper}
-            alt="wallpaper"
-          ></img>
-          <img
-            className={classes.photo}
-            src={profileData.photos.small}
-            alt="avatar"
-          ></img>
-          <div>{profileData.fullName}</div>
+        <StyledProfileInfoWrapper>
+          <StyledBannerImage src={wallpaper} alt="wallpaper" />
+          <StyledAvatar src={profileData.photos.small} alt="avatar" />
+          <StyledProfileName>{profileData.fullName}</StyledProfileName>
           <ProfileStatus
             {...profileData}
             setUserStatus={props.setUserStatus}
             getUserStatus={props.getUserStatus}
             profileStatus={props.profileStatus}
           />
-        </div>
+        </StyledProfileInfoWrapper>
       ) : (
         <Preloader />
       )}
-    </div>
+    </>
   );
 };

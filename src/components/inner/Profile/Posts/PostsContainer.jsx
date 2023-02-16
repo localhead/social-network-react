@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { addPostActionCreator, updateNewPostText } from "redux/profile-reducer";
+import { addPostActionCreator } from "redux/profile-reducer";
 import { Posts } from "./Posts";
 
 /* export const MyPostsContainer = (props) => {
@@ -33,9 +33,6 @@ let mapDispatchToProps = (dispatch) => {
   return {
     addPostHandler: (text) => {
       dispatch(addPostActionCreator(text));
-    },
-    postChangeHandler: (text) => {
-      dispatch(updateNewPostText(text));
     },
   };
 };

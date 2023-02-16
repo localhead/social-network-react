@@ -12,14 +12,19 @@ export const StyledDialogsWrapper = styled.div`
 `;
 
 export const StyledUsersList = styled.div`
-  padding: 15px;
   background-color: rgba(216, 216, 216, 0.67);
   grid-area: d;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const StyledMessages = styled.div`
   grid-area: h;
   height: 100%;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const StyledSendMessageForm = styled.div`
@@ -27,10 +32,10 @@ export const StyledSendMessageForm = styled.div`
 `;
 
 export const StyledUserProfileDialog = styled(Link)`
-  margin-top: 10px;
+  display: flex;
+  text-decoration: none;
 `;
 
 export const StyledMessage = styled.div`
   grid-area: h;
-  height: 100%;
 `;

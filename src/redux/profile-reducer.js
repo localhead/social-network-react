@@ -33,7 +33,7 @@ export const profileReducer = (state = initialState, action) => {
   if (action.type === "ADD-POST") {
     const newPost = [
       {
-        id: Math.random() * 10,
+        id: String(Math.random() * 10),
         message: action.textData,
         likesCount: "10",
         image:
@@ -49,11 +49,6 @@ export const profileReducer = (state = initialState, action) => {
     stateCopy.textAreaValue = "";
 
     return stateCopy;
-  } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-    let stateCopy = { ...state };
-
-    stateCopy.textAreaValue = action.textData;
-    return stateCopy;
   } else if (action.type === "UPDATE-PROFILE-DATA") {
     //console.log(action.userData);
     return { ...state, userProfile: action.userData };
@@ -68,13 +63,6 @@ export const profileReducer = (state = initialState, action) => {
 export const addPostActionCreator = (text) => {
   return {
     type: "ADD-POST",
-    textData: text,
-  };
-};
-
-export const updateNewPostText = (text) => {
-  return {
-    type: "UPDATE-NEW-POST-TEXT",
     textData: text,
   };
 };
@@ -99,7 +87,6 @@ export const setAuthUserStatus = (statusText) => {
     statusText: statusText,
   };
 };
-
 /* 
 
 

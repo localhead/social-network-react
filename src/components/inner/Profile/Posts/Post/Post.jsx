@@ -1,15 +1,17 @@
 import React from "react";
 
-import classes from "./Post.module.css";
+import {
+  StyledLikesCount,
+  StyledPostAvatar,
+  StyledPostContent,
+} from "./StyledPost";
 
 export const Post = function (props) {
   return (
-    <div className={classes.post}>
-      <div className={classes.postItem} key={props.id}>
-        <img className={classes.avatar} src={props.image} alt="avatar" />
-        {props.message}
-        <div className={classes.postLikes}>{props.likesCount} likes</div>
-      </div>
-    </div>
+    <StyledPostContent key={props.id}>
+      <StyledPostAvatar src={props.image} alt="avatar" />
+      {props.message}
+      <StyledLikesCount>{props.likesCount} likes</StyledLikesCount>
+    </StyledPostContent>
   );
 };

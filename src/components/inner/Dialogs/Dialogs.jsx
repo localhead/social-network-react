@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Navigate } from "react-router-dom";
+import { MessageForm } from "./MessageForm/MessageForm";
 import {
   StyledDialogsWrapper,
   StyledMessage,
@@ -11,25 +12,14 @@ import {
 } from "./StyledDialogs";
 
 export const Dialogs = (props) => {
-  const { messagesData, dialogsData, messageTextArea } =
-    props.props.dialogsPage;
-  const { onMessageChange, onSendMessage } = props;
-
-  const sendMessageLink = React.createRef();
+  const { messagesData, dialogsData } = props.props.dialogsPage;
+  const { onSendMessage } = props;
 
   const isAuthorized = props.props.authData.isAuthorized;
 
-  const sendMessageHandlerInner = () => {
-    const text = messageTextArea;
-    onSendMessage(text);
+  const sendMessageHandlerInner = (formData) => {
+    onSendMessage(formData.messageText);
   };
-
-  const onMessageChangeInner = () => {
-    const text = sendMessageLink.current.value;
-
-    onMessageChange(text);
-  };
-  console.log(isAuthorized);
 
   return (
     <>
@@ -52,12 +42,7 @@ export const Dialogs = (props) => {
         </StyledMessages>
 
         <StyledSendMessageForm>
-          <textarea
-            ref={sendMessageLink}
-            onChange={onMessageChangeInner}
-            value={messageTextArea}
-          ></textarea>
-          <button onClick={sendMessageHandlerInner}>Send Message</button>
+          <MessageForm onSubmit={sendMessageHandlerInner} />
         </StyledSendMessageForm>
       </StyledDialogsWrapper>
     </>

@@ -10,17 +10,10 @@ let initialState = {
     { id: 2, message: "fuck u!" },
     { id: 3, message: "goodbye!" },
   ],
-
-  messageTextArea: "bad cock",
 };
 
 export const dialogsReducer = (state = initialState, action) => {
-  if (action.type === "UPDATE-MESSAGE-TEXT") {
-    let stateCopy = { ...state };
-    stateCopy.messageTextArea = action.textData;
-
-    return stateCopy;
-  } else if (action.type === "ADD-MESSAGE-TO-DIALOG") {
+  if (action.type === "ADD-MESSAGE-TO-DIALOG") {
     const newPost = [{ id: Math.random() * 10, message: action.textData }];
 
     const [res] = newPost;
@@ -28,18 +21,9 @@ export const dialogsReducer = (state = initialState, action) => {
     let stateCopy = { ...state };
     stateCopy.messagesData = [...state.messagesData, res];
 
-    stateCopy.messageTextArea = "";
-
     return stateCopy;
   }
   return state;
-};
-
-export const updateMessageText = (text) => {
-  return {
-    type: "UPDATE-MESSAGE-TEXT",
-    textData: text,
-  };
 };
 
 export const addMessageToDialog = (text) => {

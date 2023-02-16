@@ -2,7 +2,7 @@ import { withAuthRedirect } from "components/highOrder/withAuthRedirect";
 import { connect } from "react-redux";
 import { getAuthUserThunk } from "redux/auth-reducer";
 
-import { addMessageToDialog, updateMessageText } from "redux/dialogs-reducer";
+import { addMessageToDialog } from "redux/dialogs-reducer";
 import { Dialogs } from "./Dialogs";
 
 let mapStateToProps = (state) => {
@@ -13,9 +13,6 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    onMessageChange: (text) => {
-      dispatch(updateMessageText(text));
-    },
     onSendMessage: (text) => {
       dispatch(addMessageToDialog(text));
     },
