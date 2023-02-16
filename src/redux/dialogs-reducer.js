@@ -14,9 +14,9 @@ let initialState = {
 
 export const dialogsReducer = (state = initialState, action) => {
   if (action.type === "ADD-MESSAGE-TO-DIALOG") {
-    const newPost = [{ id: Math.random() * 10, message: action.textData }];
+    const newMessage = [{ id: Math.random() * 10, message: action.textData }];
 
-    const [res] = newPost;
+    const [res] = newMessage;
 
     let stateCopy = { ...state };
     stateCopy.messagesData = [...state.messagesData, res];

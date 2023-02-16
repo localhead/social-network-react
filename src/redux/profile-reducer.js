@@ -43,8 +43,7 @@ export const profileReducer = (state = initialState, action) => {
     const [res] = newPost;
 
     let stateCopy = { ...state };
-    stateCopy.postsData = [...state.postsData];
-    stateCopy.postsData.push(res);
+    stateCopy.postsData = [...state.postsData, res];
 
     stateCopy.textAreaValue = "";
 
