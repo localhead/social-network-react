@@ -48,6 +48,19 @@ export const authAPI = {
       return response;
     });
   },
+  loginIn(email, password, rememberMe = false) {
+    return instance
+      .post(`auth/login`, { email, password, rememberMe })
+      .then((response) => {
+        return response;
+      });
+  },
+  logOut() {
+    console.log("here is response");
+    return instance.delete(`auth/login`).then((response) => {
+      return response;
+    });
+  },
 };
 /* 
 

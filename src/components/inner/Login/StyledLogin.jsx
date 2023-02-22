@@ -19,3 +19,5 @@ export const StyledLoginFromWrapper = styled.div`
   align-self: center;
   gap: 15px;
 `;
+
+export const StyledErrorMessage = styled.div``;

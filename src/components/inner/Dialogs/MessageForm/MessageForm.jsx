@@ -4,6 +4,8 @@ import {
   StyledMessageCustomForm,
   StyledMessageCustomFormWrapper,
 } from "./StyledMessageForm";
+import { requiredField } from "utils/validators";
+import { TextArea } from "components/common/FormsControl/FormsControl";
 
 const MessageCustomForm = (props) => {
   const { handleSubmit } = props;
@@ -12,9 +14,10 @@ const MessageCustomForm = (props) => {
     <StyledMessageCustomForm onSubmit={handleSubmit}>
       <StyledMessageCustomFormWrapper>
         <Field
-          component={"textarea"}
+          component={TextArea}
           placeholder="Введите текст"
           name={"messageText"}
+          validate={[requiredField]}
         />
         <button>Отправить</button>
       </StyledMessageCustomFormWrapper>
