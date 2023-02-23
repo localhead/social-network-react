@@ -13,33 +13,54 @@ import { GlobalStyle } from "utils/GlobalStyles";
 import { StyledAppInnerWrapper, StyledAppWrapper } from "StyledApp";
 import { ProfileConnecter } from "components/inner/Profile/ProfileContainer";
 import { LoginConnecter } from "components/inner/Login/LoginConnecter";
+import { connect } from "react-redux";
+import { initializeApp } from "redux/app-reducer";
+import { Preloader } from "components/common/preloader/Preloader";
 
 // What is component?
 // Component is a function which always returns JSX
 // App - is a component. And Component is a TAG
 
-const App = () => {
+class App extends React.Component {
   /*  const { state, dispatch } = props; */
 
-  return (
-    <div className="App">
-      <GlobalStyle />
-      <StyledAppWrapper>
-        <HeaderContainer />
-        <NavbarContainer />
-        <StyledAppInnerWrapper>
-          <Routes>
-            <Route path="/profile" element={<ProfileConnecter />}>
-              <Route path=":id" element={<ProfileConnecter />} />
-            </Route>
-            <Route path="/dialogs" element={<DialogsContainer />} />
-            <Route path="/users" element={<UsersContainer />} />
-            <Route path="/login" element={<LoginConnecter />} />
-          </Routes>
-        </StyledAppInnerWrapper>
-      </StyledAppWrapper>
-    </div>
-  );
+  componentDidMount() {
+    this.props.initializeApp();
+  }
+
+  render() {
+    const isInitialized = this.props.state.isInitialized;
+
+    if (!isInitialized) return <Preloader />;
+
+    return (
+      <div className="App">
+        <GlobalStyle />
+        <StyledAppWrapper>
+          <HeaderContainer />
+          <NavbarContainer />
+          <StyledAppInnerWrapper>
+            <Routes>
+              <Route path="/profile" element={<ProfileConnecter />}>
+                <Route path=":id" element={<ProfileConnecter />} />
+              </Route>
+              <Route path="/dialogs" element={<DialogsContainer />} />
+              <Route path="/users" element={<UsersContainer />} />
+              <Route path="/login" element={<LoginConnecter />} />
+            </Routes>
+          </StyledAppInnerWrapper>
+        </StyledAppWrapper>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    state: state.appData,
+  };
 };
 
-export default App;
+export default connect(mapStateToProps, {
+  initializeApp,
+})(App);

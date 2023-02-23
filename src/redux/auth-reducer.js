@@ -28,16 +28,17 @@ export const authUserData = (userData, isAuthorized) => {
 
 
 */
-export const getAuthUserThunk = () => {
-  return (dispatch) => {
-    authAPI.getUserAuthInfo().then((response) => {
-      const userData = response.data.data;
-      //console.log(response.data.resultCode);
-      console.log("Current user info: ", userData);
-      //console.log("sss", response);
-      response.data.resultCode === 0 && dispatch(authUserData(userData, true));
-    });
-  };
+export const getAuthUserThunk = () => (dispatch) => {
+  return authAPI.getUserAuthInfo().then((response) => {
+    const userData = response.data.data;
+
+    //console.log("Current user info: ", userData);
+
+    if (response.data.resultCode === 0) {
+      dispatch(authUserData(userData, true));
+    }
+    return response;
+  });
 };
 
 export const loginUser = (email, password, rememberMe) => {

@@ -3,7 +3,7 @@ import { StyledTextarea } from "./StyledFormsControl";
 
 export const TextArea = (props) => {
   const { input, meta } = props;
-  console.log(meta);
+  //console.log(meta);
 
   const isError = meta.error && meta.touched;
   return (

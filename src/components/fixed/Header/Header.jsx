@@ -4,11 +4,7 @@ import logo from "../../../assets/img/logo.png";
 import { StyledButton, StyledHeader, StyledLogo } from "./StyledHeader";
 
 export const Header = function (props) {
-  console.log(props);
-
   const LogoutHandler = () => {
-    console.log("click");
-
     props.logoutUser();
   };
 
