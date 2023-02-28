@@ -2,6 +2,7 @@ import { Header } from "./Header";
 import React from "react";
 import { connect } from "react-redux";
 import { authUserData, getAuthUserThunk, logoutUser } from "redux/auth-reducer";
+import { headerGetAuthDataReSelector } from "redux/selector";
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
@@ -18,7 +19,7 @@ class HeaderContainer extends React.Component {
 // Container + Class in one file. All in one
 let mapStateToProps = (state) => {
   return {
-    authData: state.authData,
+    authData: headerGetAuthDataReSelector(state),
     logoutUser: logoutUser,
   };
 };
