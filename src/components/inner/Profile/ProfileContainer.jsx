@@ -16,10 +16,11 @@ export class ProfileContainer extends React.Component {
   componentDidMount() {
     this.getUserStatus();
     this.getUserProfile();
+    //console.log(this.props);
   }
 
   getUserProfile() {
-    let authUserId = this.props.props.authData.id;
+    let authUserId = this.props.state.authData.id;
     let userId = Number(this.props.router.params.id);
 
     this.props.getProfileDataThunk(
@@ -48,7 +49,7 @@ export class ProfileContainer extends React.Component {
     return (
       <>
         <Profile
-          {...this.props.props}
+          {...this.props.state}
           getUserStatus={this.getUserStatus.bind(this)}
           setUserStatus={this.setAuthUserStatus.bind(this)}
         />

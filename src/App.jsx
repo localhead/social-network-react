@@ -1,6 +1,3 @@
-// Installing package for routing
-// npm install react-router-dom -save
-// -save will update json with this package
 import { Routes, Route } from "react-router-dom";
 import React from "react";
 import { DialogsContainer } from "components/inner/Dialogs/DialogsContainer";
@@ -10,7 +7,7 @@ import HeaderContainer from "components/fixed/Header/HeaderContainer";
 import UsersContainer from "components/inner/Users/UsersContainer";
 
 import { GlobalStyle } from "utils/GlobalStyles";
-import { StyledAppInnerWrapper, StyledAppWrapper } from "StyledApp";
+import { StyledAppInnerWrapper, StyledAppWrapper } from "styles";
 import { ProfileConnecter } from "components/inner/Profile/ProfileContainer";
 import { LoginConnecter } from "components/inner/Login/LoginConnecter";
 import { connect } from "react-redux";
@@ -30,14 +27,13 @@ class App extends React.Component {
 
   render() {
     const isInitialized = this.props.state.isInitialized;
-
     if (!isInitialized) return <Preloader />;
 
     return (
       <div className="App">
         <GlobalStyle />
+        <HeaderContainer />
         <StyledAppWrapper>
-          <HeaderContainer />
           <NavbarContainer />
           <StyledAppInnerWrapper>
             <Routes>

@@ -5,7 +5,7 @@ export const GlobalStyle = createGlobalStyle`
 
 
 body {
-    font-family: 'Arial';
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.2 !important;
   }
 

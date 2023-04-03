@@ -1,14 +1,15 @@
 import { Preloader } from "components/common/preloader/Preloader";
 import React from "react";
-import wallpaper from "../../../../assets/img/wallpaper1.jpg";
+import emptyUser from "../../../../assets/img/emptyUser.png";
 import { ProfileStatus } from "../ProfileStatus/ProfileStatus";
 
 import {
   StyledAvatar,
-  StyledBannerImage,
+  StyledEmptyAvatar,
+  StyledInfoContainer,
   StyledProfileInfoWrapper,
   StyledProfileName,
-} from "./StyledProfileInfo";
+} from "./styles";
 
 export const ProfileInfo = (props) => {
   const profileData = props.props;
@@ -17,15 +18,20 @@ export const ProfileInfo = (props) => {
     <>
       {profileData !== null ? (
         <StyledProfileInfoWrapper>
-          <StyledBannerImage src={wallpaper} alt="wallpaper" />
-          <StyledAvatar src={profileData.photos.small} alt="avatar" />
-          <StyledProfileName>{profileData.fullName}</StyledProfileName>
-          <ProfileStatus
-            {...profileData}
-            setUserStatus={props.setUserStatus}
-            getUserStatus={props.getUserStatus}
-            profileStatus={props.profileStatus}
-          />
+          {profileData.photos.small ? (
+            <StyledAvatar src={profileData.photos.small} alt="avatar" />
+          ) : (
+            <StyledEmptyAvatar src={emptyUser} alt="avatar" />
+          )}
+          <StyledInfoContainer>
+            <StyledProfileName>{profileData.fullName}</StyledProfileName>
+            <ProfileStatus
+              {...profileData}
+              setUserStatus={props.setUserStatus}
+              getUserStatus={props.getUserStatus}
+              profileStatus={props.profileStatus}
+            />
+          </StyledInfoContainer>
         </StyledProfileInfoWrapper>
       ) : (
         <Preloader />

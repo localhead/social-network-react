@@ -1,5 +1,9 @@
 import React from "react";
-import { StyledProfileStatusContainer } from "./ProfileStatusStyles";
+import {
+  StatusText,
+  StyledInput,
+  StyledProfileStatusContainer,
+} from "./styles";
 
 export class ProfileStatus extends React.Component {
   // here is local state. Do not has common with Global Redux State
@@ -8,7 +12,9 @@ export class ProfileStatus extends React.Component {
     status: this.props.profileStatus,
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props);
+  }
 
   getStatus() {
     this.props.getUserStatus();
@@ -23,6 +29,8 @@ export class ProfileStatus extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     // this method is called every time rerender Happens in this class component
+    console.log(prevProps, "/", prevState);
+
     if (prevProps.profileStatus !== prevState.status) {
       this.setState({
         status: this.props.profileStatus,
@@ -40,6 +48,7 @@ export class ProfileStatus extends React.Component {
     this.setState({
       status: e.currentTarget.value,
     });
+
     this.props.setUserStatus(e.currentTarget.value);
     this.getStatus();
   };
@@ -48,17 +57,17 @@ export class ProfileStatus extends React.Component {
     return (
       <StyledProfileStatusContainer>
         {!this.state.editMode && (
-          <div onDoubleClick={this.activateStatusEdit.bind(this)}>
+          <StatusText onDoubleClick={this.activateStatusEdit.bind(this)}>
             {this.props.profileStatus}
-          </div>
+          </StatusText>
         )}
         {this.state.editMode && (
-          <input
+          <StyledInput
             autoFocus
             onChange={this.onChangeStatus}
             onBlur={this.deactivateStatusEdit.bind(this)}
             value={this.state.status}
-          ></input>
+          ></StyledInput>
         )}
       </StyledProfileStatusContainer>
     );

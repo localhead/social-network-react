@@ -1,24 +1,53 @@
-import React from "react";
-import logo from "../../../assets/img/logo.png";
+import React, { useState } from "react";
+import logo from "../../../assets/img/companyLogo.png";
 
-import { StyledButton, StyledHeader, StyledLogo } from "./StyledHeader";
+import {
+  StyledAvatarContainer,
+  StyledAvatarImage,
+  StyledCaretImage,
+  StyledDropdown,
+  StyledHeader,
+  StyledHeaderContainer,
+  StyledLogo,
+} from "./styles";
+
+import userEmptyAvatarImage from "../../../assets/svgs/User.svg";
+
+import userIcon from "../../../assets/svgs/UserIcon.svg";
+import signOut from "../../../assets/svgs/SignOut.svg";
+
+import caretImage from "../../../assets/svgs/CaretRight.svg";
+import { Button } from "packages/uiKit/Button";
 
 export const Header = function (props) {
   const LogoutHandler = () => {
     props.logoutUser();
   };
 
+  const [showDropdown, setShowDropdown] = useState(false);
+
   return (
     <StyledHeader>
-      <StyledLogo src={logo} alt="logo" />
-      {props.login ? (
-        <>
-          <div>{props.login}</div>
-          <StyledButton onClick={LogoutHandler}>выйти</StyledButton>
-        </>
-      ) : (
-        <StyledButton>выйти</StyledButton>
-      )}
+      <StyledHeaderContainer>
+        <StyledLogo src={logo} alt="logo" />
+
+        <StyledAvatarContainer
+          onClick={() => {
+            setShowDropdown((prev) => !prev);
+          }}
+        >
+          <StyledAvatarImage src={userEmptyAvatarImage} alt="avatar" />
+          <StyledCaretImage src={caretImage} alt="caret" />
+        </StyledAvatarContainer>
+        {showDropdown && (
+          <StyledDropdown>
+            <Button icon={userIcon}>Настройки</Button>
+            <Button icon={signOut} onClick={LogoutHandler}>
+              Выйти
+            </Button>
+          </StyledDropdown>
+        )}
+      </StyledHeaderContainer>
     </StyledHeader>
   );
 };
