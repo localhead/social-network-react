@@ -17,7 +17,7 @@ export const withAuthRedirect = (Component) => {
     }
   }
 
-  // this does not have much sence cuz we have an access to "authData.isAuthorized" here.
+  // this does not have much sense cuz we have an access to "authData.isAuthorized" here.
   // but if we need we still can manually connect our state to our component
   let ConnectedWithRedirectComponent = connect(mapStateToPropsForRedirect)(
     RedirectComponent

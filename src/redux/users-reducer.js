@@ -1,4 +1,4 @@
-import { usersAPI } from "api/API";
+import { usersAPI } from "api/apiService";
 
 let initialState = {
   users: [],
@@ -121,7 +121,7 @@ export const getUsersOnPageThunk = (number, pageSize) => {
     dispatch(setFetching(true));
     dispatch(setCurrentPage(number));
 
-    usersAPI.getUsersData(number, pageSize).then((data) => {
+    usersAPI.getUserData(number, pageSize).then((data) => {
       dispatch(setUsers(data.items));
       dispatch(setFetching(false));
     });

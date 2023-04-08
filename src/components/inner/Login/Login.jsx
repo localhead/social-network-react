@@ -8,12 +8,10 @@ import {
   StyledLoginFromWrapper,
   StyledLoginWrapper,
   StyledTitle,
-} from "./StyledLogin";
+} from "./styles";
 
 const LoginForm = (props) => {
   const { handleSubmit } = props;
-
-  console.log(props);
 
   return (
     <StyledLoginForm onSubmit={handleSubmit}>
@@ -35,25 +33,13 @@ const LoginForm = (props) => {
 };
 
 const LoginReduxForm = reduxForm({
-  // a unique name for the form
   form: "login",
 })(LoginForm);
 
 export const Login = (props) => {
-  console.log("login props", props);
-
-  const isAuth = props.state.authData.isAuthorized;
-
-  // Getting data from Redux
-  // const stateReduxForm = props.form;
-  // console.log(stateReduxForm);
-
   const onSubmit = (formData) => {
-    console.log(formData);
     props.loginUser(formData.email, formData.password, formData.rememberMe);
   };
-
-  if (isAuth) return <Navigate to="/profile" />;
 
   return (
     <>

@@ -1,10 +1,27 @@
-import classes from "./Users.module.css";
 import React from "react";
 import { NavLink } from "react-router-dom";
+import {
+  StyledButtonBasic,
+  StyledButtonSelected,
+  StyledContainer,
+  StyledFollowButton,
+  StyledImage,
+  StyledPages,
+  StyledUnFollowButton,
+} from "./styles";
+
+import emptyUser from "../../../assets/img/emptyUser.png";
 
 export const Users = (props) => {
-  const { users, isFetchingFollowing, pageSize, totalUserCount, currentPage } =
-    props;
+  const {
+    users,
+    isFetchingFollowing,
+    pageSize,
+    totalUserCount,
+    currentPage,
+    onFollowUser,
+    onUnFollowUser,
+  } = props;
 
   let pagesCount = Math.ceil(totalUserCount / pageSize);
   const pages = [];
@@ -16,47 +33,50 @@ export const Users = (props) => {
   //console.log("global ", isFetchingFollowing);
 
   const followUserHandler = (userId) => {
-    props.onFollowUser(userId);
+    onFollowUser(userId);
   };
 
   const UnFollowUserHandler = (userId) => {
-    props.onUnFollowUser(userId);
+    onUnFollowUser(userId);
   };
 
   return (
-    <div className={classes.container}>
-      <div className={classes.pages}>
+    <StyledContainer>
+      <StyledPages>
         {pages.map((number, index) => {
           return (
-            <div
-              key={index}
-              className={
-                number === currentPage
-                  ? classes.buttonSelected
-                  : classes.buttonBasic
-              }
-              onClick={(e) => {
-                props.onChangePage(number);
-              }}
-            >
-              {number}
-            </div>
+            <>
+              {number === currentPage ? (
+                <StyledButtonSelected
+                  key={index}
+                  onClick={(e) => {
+                    props.onChangePage(number);
+                  }}
+                >
+                  {number}
+                </StyledButtonSelected>
+              ) : (
+                <StyledButtonBasic
+                  key={index}
+                  onClick={(e) => {
+                    props.onChangePage(number);
+                  }}
+                >
+                  {number}
+                </StyledButtonBasic>
+              )}
+            </>
           );
         })}
-      </div>
+      </StyledPages>
 
       {users.map((item) => {
         return (
           <div key={item.id}>
             <NavLink to={"/profile/" + item.id}>
-              <img
-                src={
-                  item.photos.small === null
-                    ? "https://stihi.ru/pics/2013/09/01/8901.jpg"
-                    : item.photos.small
-                }
+              <StyledImage
+                src={item.photos.small === null ? emptyUser : item.photos.small}
                 alt="pict"
-                className={classes.image}
               />
             </NavLink>
 
@@ -64,29 +84,27 @@ export const Users = (props) => {
             <div>{item.status}</div>
             <div>{item.uniqueUrlName}</div>
             {item.followed ? (
-              <button
+              <StyledUnFollowButton
                 disabled={isFetchingFollowing.some((id) => id === item.id)}
-                className={classes.unFollowButton}
                 onClick={() => {
                   UnFollowUserHandler(item.id);
                 }}
               >
                 Unfollow
-              </button>
+              </StyledUnFollowButton>
             ) : (
-              <button
+              <StyledFollowButton
                 disabled={isFetchingFollowing.some((id) => id === item.id)}
-                className={classes.FollowButton}
                 onClick={() => {
                   followUserHandler(item.id);
                 }}
               >
                 Follow
-              </button>
+              </StyledFollowButton>
             )}
           </div>
         );
       })}
-    </div>
+    </StyledContainer>
   );
 };

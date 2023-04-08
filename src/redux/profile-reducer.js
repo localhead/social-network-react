@@ -1,4 +1,4 @@
-import { profileAPI } from "api/API";
+import { profileAPI } from "api/apiService";
 
 let initialState = {
   postsData: [

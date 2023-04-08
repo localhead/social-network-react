@@ -30,7 +30,7 @@ export class UsersContainer extends React.Component {
   }
 
   onChangePage = (number = 1) => {
-    const pageSize = this.props.props.usersData.pageSize;
+    const pageSize = this.props.usersData.pageSize;
     this.props.getUsersOnPageThunk(number, pageSize);
   };
 
@@ -43,10 +43,9 @@ export class UsersContainer extends React.Component {
   };
 
   render() {
-    const isFetching = this.props.props.usersData.isFetching;
-    const userDataProps = this.props.props.usersData;
+    const isFetching = this.props.usersData.isFetching;
     const setFetchingFollowing = this.props.setFetchingFollowing;
-    const isAuthorized = this.props.props.authData.isAuthorized;
+    const isAuthorized = this.props.authData.isAuthorized;
 
     return (
       <>
@@ -55,7 +54,7 @@ export class UsersContainer extends React.Component {
           <Preloader />
         ) : (
           <Users
-            {...userDataProps}
+            {...this.props.usersData}
             onChangePage={this.onChangePage}
             setFetchingFollowing={setFetchingFollowing}
             onFollowUser={this.onFollowUser}
@@ -69,7 +68,8 @@ export class UsersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    props: state,
+    authData: state.authData,
+    usersData: state.usersData,
   };
 };
 
@@ -88,44 +88,3 @@ export default compose(
     unFollowUserThunk,
   })
 )(UsersContainer);
-
-// without compose:
-// let AuthRedirectContainer = withAuthRedirect(UsersContainer);
-// export const UsersConnecter = connect(mapStateToProps, {
-//   setUsers,
-//   setCurrentPage,
-//   setTotalCount,
-//   setFetching,
-//   setFetchingFollowing,
-//   getUsersOnPageThunk,
-//   getTotalUsersCountThunk,
-//   followUserThunk,
-//   unFollowUserThunk,
-// })(AuthRedirectContainer);
-/* 
-
-
-*/
-// old variant of mapDispatchToProps
-/* let mapDispatchToProps = (dispatch) => {
-  return {
-    onFollowUser: (userId) => {
-      dispatch(followUser(userId));
-    },
-    onUnFollowUser: (userId) => {
-      dispatch(unfollowUser(userId));
-    },
-    setUsersData: (users) => {
-      dispatch(setUsers(users));
-    },
-    setPage: (page) => {
-      dispatch(setCurrentPage(page));
-    },
-    setCount: (count) => {
-      dispatch(setTotalCount(count));
-    },
-    setFetching: (value) => {
-      dispatch(setFetching(value));
-    },
-  };
-}; */

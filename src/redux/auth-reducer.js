@@ -1,4 +1,4 @@
-import { authAPI } from "api/API";
+import { authAPI } from "api/apiService";
 import { stopSubmit } from "redux-form";
 
 let initialState = {
