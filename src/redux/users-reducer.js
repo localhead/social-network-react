@@ -131,7 +131,6 @@ export const getUsersOnPageThunk = (number, pageSize) => {
 export const getTotalUsersCountThunk = () => {
   return (dispatch) => {
     usersAPI.getAllUsersData().then((data) => {
-      //console.log(response);
       dispatch(setTotalCount(Math.ceil(data.totalCount / 70)));
       dispatch(setFetching(false));
     });

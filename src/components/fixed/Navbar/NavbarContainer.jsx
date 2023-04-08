@@ -1,19 +1,17 @@
+import React from "react";
 import { connect } from "react-redux";
+import { NavBarLinks } from "./Links/NavBarLinks";
 
-import { Navbar } from "./Navbar";
+class NavbarContainer extends React.Component {
+  render() {
+    return <NavBarLinks {...this.props} />;
+  }
+}
 
 let mapStateToProps = (state) => {
   return {
-    friendsData: state.sidebarData.friendsData,
     navigationLinks: state.sidebarData.navigationLinks,
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export const NavbarContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Navbar);
+export default connect(mapStateToProps)(NavbarContainer);

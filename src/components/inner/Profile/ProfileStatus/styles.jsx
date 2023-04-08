@@ -5,28 +5,37 @@ export const StyledProfileStatusContainer = styled.div`
   margin: 15px 0;
 `;
 
+export const StyledStaticStatus = styled.div`
+  display: flex;
+`;
+
+export const StyledEditStatus = styled.div`
+  display: flex;
+`;
+
 export const StyledInput = styled.input`
   font-size: 14px;
   font-family: "Montserrat", sans-serif;
-
-  border-bottom: 1px solid ${colors.gray0};
-  padding-bottom: 5px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-
+  width: 300px;
   outline: none;
-
-  margin: 0;
-
-  :focus {
-    outline: none;
-  }
+  border-top: 1px solid ${colors.gray2};
+  border-left: 1px solid ${colors.gray2};
+  border-bottom: 1px solid ${colors.gray2};
+  border-right: none;
+  padding-left: 8px;
 `;
 
 export const StatusText = styled.div`
   font-size: 14px;
-  white-space: pre-line;
-  border: 1px solid transparent;
-  padding-top: 1px;
+  font-family: "Montserrat", sans-serif;
+  border-top: 1px solid ${colors.gray2};
+  border-left: 1px solid ${colors.gray2};
+  border-bottom: 1px solid ${colors.gray2};
+  border-right: none;
+  color: ${colors.gray4};
+  width: fit-content;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
 `;

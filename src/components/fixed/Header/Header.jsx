@@ -11,13 +11,13 @@ import {
   StyledLogo,
 } from "./styles";
 
-import userEmptyAvatarImage from "../../../assets/svgs/User.svg";
+import userEmptyAvatarImage from "../../../assets/img/emptyUser.png";
 
 import userIcon from "../../../assets/svgs/UserIcon.svg";
 import signOut from "../../../assets/svgs/SignOut.svg";
 
 import caretImage from "../../../assets/svgs/CaretRight.svg";
-import { Button } from "packages/uiKit/Button";
+import { ButtonPrimary } from "packages/uiKit/ButtonPrimary";
 
 export const Header = function (props) {
   const LogoutHandler = () => {
@@ -41,10 +41,10 @@ export const Header = function (props) {
         </StyledAvatarContainer>
         {showDropdown && (
           <StyledDropdown>
-            <Button icon={userIcon}>Настройки</Button>
-            <Button icon={signOut} onClick={LogoutHandler}>
+            <ButtonPrimary icon={userIcon}>Настройки</ButtonPrimary>
+            <ButtonPrimary icon={signOut} onClick={LogoutHandler}>
               Выйти
-            </Button>
+            </ButtonPrimary>
           </StyledDropdown>
         )}
       </StyledHeaderContainer>

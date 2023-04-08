@@ -1,8 +1,12 @@
-import { TextArea } from "components/common/FormsControl/FormsControl";
+import { ButtonPrimary } from "packages/uiKit/ButtonPrimary";
 import React from "react";
-import { Field, reduxForm } from "redux-form";
+import { reduxForm } from "redux-form";
 import { maxLengthCreator, requiredField } from "utils/validators";
-import { StyledAddPostForm, StyledAddPostFormWrapper } from "./StyledAddPost";
+import {
+  StyledAddPostForm,
+  StyledAddPostFormWrapper,
+  StyledField,
+} from "./StyledAddPost";
 
 const maxLength = maxLengthCreator(10);
 
@@ -12,13 +16,13 @@ const AddPostForm = (props) => {
   return (
     <StyledAddPostForm onSubmit={handleSubmit}>
       <StyledAddPostFormWrapper>
-        <Field
+        <StyledField
           validate={[requiredField, maxLength]}
-          component={TextArea}
-          placeholder="Введите текст"
+          component={"textarea"}
+          placeholder="Что у вас нового?"
           name={"postText"}
         />
-        <button>Добавить пост</button>
+        <ButtonPrimary>Добавить пост</ButtonPrimary>
       </StyledAddPostFormWrapper>
     </StyledAddPostForm>
   );

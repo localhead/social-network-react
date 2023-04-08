@@ -105,10 +105,6 @@ export default compose(
 /* 
 
 
-
-
-
-
 */
 // old variant of mapDispatchToProps
 /* let mapDispatchToProps = (dispatch) => {

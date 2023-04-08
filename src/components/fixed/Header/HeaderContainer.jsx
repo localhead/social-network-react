@@ -3,17 +3,20 @@ import React from "react";
 import { connect } from "react-redux";
 import { authUserData, getAuthUserThunk, logoutUser } from "redux/auth-reducer";
 import { headerGetAuthDataReSelector } from "redux/selector";
+import { getProfileDataThunk } from "redux/profile-reducer";
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
     this.props.getAuthUserThunk();
-    console.log("header render");
-    console.log(this.props.state);
   }
 
   render() {
     return (
-      <Header {...this.props.authData} logoutUser={this.props.logoutUser} />
+      <Header
+        {...this.props.authData}
+        logoutUser={this.props.logoutUser}
+        userData={this.props.profileData}
+      />
     );
   }
 }
@@ -23,7 +26,7 @@ let mapStateToProps = (state) => {
   return {
     authData: headerGetAuthDataReSelector(state),
     logoutUser: logoutUser,
-    state: state.appData,
+    profileData: state.profilePage,
   };
 };
 
@@ -31,4 +34,5 @@ export default connect(mapStateToProps, {
   authUserData,
   getAuthUserThunk,
   logoutUser,
+  getProfileDataThunk,
 })(HeaderContainer);

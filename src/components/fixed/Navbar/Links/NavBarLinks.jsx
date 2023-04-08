@@ -1,13 +1,13 @@
-import {
-  StyledLink,
-  StyledLinksWrapper,
-  StyledList,
-} from "./StyledNavBarLinks";
+import { StyledLink, StyledLinksWrapper, StyledList } from "./styles";
 
 import React from "react";
 
 export const NavBarLinks = (props) => {
   const navLinks = props.navigationLinks;
+
+  //const authId = props.authData.id;
+
+  //const profileId = props.profilePage.userProfile.userId;
 
   return (
     <StyledLinksWrapper>

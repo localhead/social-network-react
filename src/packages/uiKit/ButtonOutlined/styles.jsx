@@ -7,8 +7,10 @@ export const StyledContainer = styled.button`
   font-family: "Montserrat", sans-serif;
   gap: 5px;
   cursor: pointer;
-  border: none;
-  background: none;
+  border: 1px solid ${colors.gray2};
+  background: transparent;
+  color: ${colors.dark};
+  padding: 5px 25px;
 `;
 export const StyledIcon = styled.img`
   width: 24px;

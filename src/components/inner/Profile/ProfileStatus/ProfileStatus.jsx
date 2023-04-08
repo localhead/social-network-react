@@ -1,8 +1,12 @@
+import { ButtonOutlined } from "packages/uiKit/ButtonOutlined";
+import { ButtonPrimary } from "packages/uiKit/ButtonPrimary";
 import React from "react";
 import {
   StatusText,
+  StyledEditStatus,
   StyledInput,
   StyledProfileStatusContainer,
+  StyledStaticStatus,
 } from "./styles";
 
 export class ProfileStatus extends React.Component {
@@ -12,9 +16,7 @@ export class ProfileStatus extends React.Component {
     status: this.props.profileStatus,
   };
 
-  componentDidMount() {
-    console.log(this.props);
-  }
+  componentDidMount() {}
 
   getStatus() {
     this.props.getUserStatus();
@@ -29,13 +31,7 @@ export class ProfileStatus extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     // this method is called every time rerender Happens in this class component
-    console.log(prevProps, "/", prevState);
-
-    if (prevProps.profileStatus !== prevState.status) {
-      this.setState({
-        status: this.props.profileStatus,
-      });
-    }
+    //console.log(prevProps, "/", prevState);
   }
 
   deactivateStatusEdit() {
@@ -45,29 +41,40 @@ export class ProfileStatus extends React.Component {
   }
 
   onChangeStatus = (e) => {
+    console.log(e.currentTarget.value);
     this.setState({
       status: e.currentTarget.value,
     });
-
-    this.props.setUserStatus(e.currentTarget.value);
-    this.getStatus();
   };
+
+  onSaveStatus() {
+    this.props.setUserStatus(this.state.status);
+    this.deactivateStatusEdit();
+    this.getStatus();
+  }
 
   render() {
     return (
       <StyledProfileStatusContainer>
         {!this.state.editMode && (
-          <StatusText onDoubleClick={this.activateStatusEdit.bind(this)}>
-            {this.props.profileStatus}
-          </StatusText>
+          <StyledStaticStatus>
+            <StatusText>{this.props.profileStatus}</StatusText>
+            <ButtonOutlined onClick={this.activateStatusEdit.bind(this)}>
+              Изменить
+            </ButtonOutlined>
+          </StyledStaticStatus>
         )}
         {this.state.editMode && (
-          <StyledInput
-            autoFocus
-            onChange={this.onChangeStatus}
-            onBlur={this.deactivateStatusEdit.bind(this)}
-            value={this.state.status}
-          ></StyledInput>
+          <StyledEditStatus>
+            <StyledInput
+              autoFocus
+              onChange={this.onChangeStatus}
+              value={this.state.status}
+            ></StyledInput>
+            <ButtonPrimary onClick={this.onSaveStatus.bind(this)}>
+              Сохранить
+            </ButtonPrimary>
+          </StyledEditStatus>
         )}
       </StyledProfileStatusContainer>
     );

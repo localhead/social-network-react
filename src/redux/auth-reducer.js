@@ -10,7 +10,6 @@ let initialState = {
 
 export const authReducer = (state = initialState, action) => {
   if (action.type === "SET-USER-LOGIN-DATA") {
-    //console.log(state.isAuthorized);
     const stateCopy = { ...action.userData, isAuthorized: action.isAuthorized };
     return stateCopy;
   } else return state;
@@ -31,8 +30,6 @@ export const authUserData = (userData, isAuthorized) => {
 export const getAuthUserThunk = () => (dispatch) => {
   return authAPI.getUserAuthInfo().then((response) => {
     const userData = response.data.data;
-
-    //console.log("Current user info: ", userData);
 
     if (response.data.resultCode === 0) {
       dispatch(authUserData(userData, true));
