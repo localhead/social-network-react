@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "utils/colors";
 
 export const StyledImage = styled.img`
   width: 150px;
@@ -27,26 +28,64 @@ export const StyledPages = styled.div`
   flex-basis: 100%;
 `;
 
-export const StyledContainer = styled.div`
+export const StyledUserCard = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: 50px;
+  flex-direction: column;
+  gap: 5px;
+`;
+
+export const StyledNameTitle = styled.div`
+  text-overflow: ellipsis;
+  display: inline-block;
+  overflow: hidden;
+  width: fit-content;
+  white-space: nowrap;
+  width: 150px;
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+export const StyledStatusTitle = styled.div`
+  text-overflow: ellipsis;
+  display: inline-block;
+  overflow: hidden;
+  width: fit-content;
+  white-space: nowrap;
+  width: 150px;
+  font-size: 12px;
+`;
+
+export const StyledContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 150px);
+  gap: 10px;
+`;
+
+export const StyledWideContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 40px;
 `;
 
 export const StyledUnFollowButton = styled.button`
   cursor: pointer;
   border: none;
-  border-radius: 5px;
-  background-color: rgb(228, 228, 228);
-  border: 1px solid rgb(166, 166, 166);
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  color: ${colors.dark};
+  background-color: ${colors.white};
+  border: 1px solid ${colors.gray2};
   padding: 5px 10px;
 `;
 
 export const StyledFollowButton = styled.button`
   background-color: transparent;
   cursor: pointer;
-  border: 1px solid rgb(166, 166, 166);
-  border-radius: 5px;
-
+  border: 1px solid ${colors.gray2};
+  background-color: ${colors.primary};
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  color: white;
   padding: 5px 10px;
 `;

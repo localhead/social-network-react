@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { colors } from "utils/colors";
 
@@ -9,7 +10,6 @@ export const StyledProfileInfoWrapper = styled.div`
     ". p";
 
   justify-content: start;
-  grid-template-columns: auto 100%;
 `;
 
 export const StyledInfoContainer = styled.div`
@@ -64,8 +64,15 @@ export const StyledProfileContacts = styled.div`
   border-top: 1px solid ${colors.gray1};
   justify-content: space-between;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 200px);
+
   padding: 15px 10px 18px;
+`;
+
+export const StyledContactLink = styled.a`
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+
+  color: ${colors.primary};
 `;
 
 export const StyledProfileContactItem = styled.div`

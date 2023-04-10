@@ -7,6 +7,7 @@ import { ProfileStatus } from "../ProfileStatus/ProfileStatus";
 import {
   StyledAvatar,
   StyledContactEmptyTitle,
+  StyledContactLink,
   StyledContactsTitle,
   StyledEmptyAvatar,
   StyledIcon,
@@ -27,65 +28,86 @@ import githubIcon from "../../../../assets/svgs/github.svg";
 import vkIcon from "../../../../assets/svgs/vk.svg";
 
 const _ProfileInfo = (props) => {
-  const profileData = props.profileData;
+  const { profilePage } = props;
 
   return (
     <>
-      {profileData !== null ? (
+      {profilePage !== null ? (
         <StyledProfileInfoWrapper>
-          {profileData.photos.small ? (
-            <StyledAvatar src={profileData.photos.small} alt="avatar" />
+          {profilePage.photos.small ? (
+            <StyledAvatar src={profilePage.photos.large} alt="avatar" />
           ) : (
             <StyledEmptyAvatar src={emptyUser} alt="avatar" />
           )}
           <StyledInfoContainer>
-            <StyledProfileName>{profileData.fullName}</StyledProfileName>
+            <StyledProfileName>{profilePage.fullName}</StyledProfileName>
             <ProfileStatus
-              {...profileData}
+              {...profilePage}
               setUserStatus={props.setUserStatus}
               getUserStatus={props.getUserStatus}
               profileStatus={props.profileStatus}
+              authData={props.authData}
             />
             <StyledWorkInfoContainer>
               <StyledWorkStatusTitle>Место работы:</StyledWorkStatusTitle>
               <StyledWorkStatus>
-                {profileData.lookingForAJob === false
+                {profilePage.lookingForAJob === false
                   ? "Ищу работу"
-                  : profileData.lookingForAJobDescription}
+                  : profilePage.lookingForAJobDescription}
               </StyledWorkStatus>
             </StyledWorkInfoContainer>
             <StyledContactsTitle>Контакты</StyledContactsTitle>
             <StyledProfileContacts>
               <StyledProfileContactItem>
                 <StyledIcon src={facebookIcon} alt="facebook" />
-                {profileData.contacts.facebook === null ? (
+                {profilePage.contacts.facebook === null ? (
                   <StyledContactEmptyTitle>не указано</StyledContactEmptyTitle>
                 ) : (
-                  profileData.contacts.facebook
+                  <StyledContactLink
+                    href={profilePage.contacts.facebook}
+                    target="_blank"
+                  >
+                    {profilePage.contacts.facebook}
+                  </StyledContactLink>
                 )}
               </StyledProfileContactItem>
               <StyledProfileContactItem>
                 <StyledIcon src={instagramIcon} alt="facebook" />
-                {profileData.contacts.instagram === null ? (
+                {profilePage.contacts.instagram === null ? (
                   <StyledContactEmptyTitle>не указано</StyledContactEmptyTitle>
                 ) : (
-                  profileData.contacts.instagram
+                  <StyledContactLink
+                    href={profilePage.contacts.instagram}
+                    target="_blank"
+                  >
+                    {profilePage.contacts.instagram}
+                  </StyledContactLink>
                 )}
               </StyledProfileContactItem>
               <StyledProfileContactItem>
                 <StyledIcon src={githubIcon} alt="github" />
-                {profileData.contacts.github === null ? (
+                {profilePage.contacts.github === null ? (
                   <StyledContactEmptyTitle>не указано</StyledContactEmptyTitle>
                 ) : (
-                  profileData.contacts.github
+                  <StyledContactLink
+                    href={profilePage.contacts.github}
+                    target="_blank"
+                  >
+                    {profilePage.contacts.github}
+                  </StyledContactLink>
                 )}
               </StyledProfileContactItem>
               <StyledProfileContactItem>
                 <StyledIcon src={vkIcon} alt="vk" />
-                {profileData.contacts.vk === null ? (
+                {profilePage.contacts.vk === null ? (
                   <StyledContactEmptyTitle>не указано</StyledContactEmptyTitle>
                 ) : (
-                  profileData.contacts.vk
+                  <StyledContactLink
+                    href={profilePage.contacts.vk}
+                    target="_blank"
+                  >
+                    {profilePage.contacts.vk}
+                  </StyledContactLink>
                 )}
               </StyledProfileContactItem>
             </StyledProfileContacts>

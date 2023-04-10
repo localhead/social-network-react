@@ -6,8 +6,12 @@ import {
   StyledContainer,
   StyledFollowButton,
   StyledImage,
+  StyledNameTitle,
   StyledPages,
+  StyledStatusTitle,
   StyledUnFollowButton,
+  StyledUserCard,
+  StyledWideContainer,
 } from "./styles";
 
 import emptyUser from "../../../assets/img/emptyUser.png";
@@ -41,14 +45,13 @@ export const Users = (props) => {
   };
 
   return (
-    <StyledContainer>
+    <StyledWideContainer>
       <StyledPages>
         {pages.map((number, index) => {
           return (
-            <>
+            <div key={index}>
               {number === currentPage ? (
                 <StyledButtonSelected
-                  key={index}
                   onClick={(e) => {
                     props.onChangePage(number);
                   }}
@@ -57,7 +60,6 @@ export const Users = (props) => {
                 </StyledButtonSelected>
               ) : (
                 <StyledButtonBasic
-                  key={index}
                   onClick={(e) => {
                     props.onChangePage(number);
                   }}
@@ -65,46 +67,51 @@ export const Users = (props) => {
                   {number}
                 </StyledButtonBasic>
               )}
-            </>
+            </div>
           );
         })}
       </StyledPages>
+      <StyledContainer>
+        {users.map((item) => {
+          return (
+            <StyledUserCard key={item.id}>
+              <NavLink to={"/profile/" + item.id}>
+                <StyledImage
+                  src={
+                    item.photos.small === null ? emptyUser : item.photos.small
+                  }
+                  alt="pict"
+                />
+              </NavLink>
 
-      {users.map((item) => {
-        return (
-          <div key={item.id}>
-            <NavLink to={"/profile/" + item.id}>
-              <StyledImage
-                src={item.photos.small === null ? emptyUser : item.photos.small}
-                alt="pict"
-              />
-            </NavLink>
-
-            <div>{item.name}</div>
-            <div>{item.status}</div>
-            <div>{item.uniqueUrlName}</div>
-            {item.followed ? (
-              <StyledUnFollowButton
-                disabled={isFetchingFollowing.some((id) => id === item.id)}
-                onClick={() => {
-                  UnFollowUserHandler(item.id);
-                }}
-              >
-                Unfollow
-              </StyledUnFollowButton>
-            ) : (
-              <StyledFollowButton
-                disabled={isFetchingFollowing.some((id) => id === item.id)}
-                onClick={() => {
-                  followUserHandler(item.id);
-                }}
-              >
-                Follow
-              </StyledFollowButton>
-            )}
-          </div>
-        );
-      })}
-    </StyledContainer>
+              <StyledNameTitle>{item.name}</StyledNameTitle>
+              <StyledStatusTitle>
+                {item.status ? item.status : "без статуса"}
+              </StyledStatusTitle>
+              <div>{item.uniqueUrlName}</div>
+              {item.followed ? (
+                <StyledUnFollowButton
+                  disabled={isFetchingFollowing.some((id) => id === item.id)}
+                  onClick={() => {
+                    UnFollowUserHandler(item.id);
+                  }}
+                >
+                  Отписаться
+                </StyledUnFollowButton>
+              ) : (
+                <StyledFollowButton
+                  disabled={isFetchingFollowing.some((id) => id === item.id)}
+                  onClick={() => {
+                    followUserHandler(item.id);
+                  }}
+                >
+                  Подписаться
+                </StyledFollowButton>
+              )}
+            </StyledUserCard>
+          );
+        })}
+      </StyledContainer>
+    </StyledWideContainer>
   );
 };

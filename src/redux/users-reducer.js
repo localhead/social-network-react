@@ -2,7 +2,7 @@ import { usersAPI } from "api/apiService";
 
 let initialState = {
   users: [],
-  pageSize: 10,
+  pageSize: 14,
   totalUserCount: 1,
   currentPage: 0,
   isFetching: false,
@@ -128,10 +128,10 @@ export const getUsersOnPageThunk = (number, pageSize) => {
   };
 };
 
-export const getTotalUsersCountThunk = () => {
+export const getTotalUsersCountThunk = (amount) => {
   return (dispatch) => {
     usersAPI.getAllUsersData().then((data) => {
-      dispatch(setTotalCount(Math.ceil(data.totalCount / 70)));
+      dispatch(setTotalCount(Math.ceil(data.totalCount / amount)));
       dispatch(setFetching(false));
     });
   };

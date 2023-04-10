@@ -15,6 +15,6 @@ export const StyledAppWrapper = styled.div`
 
 export const StyledAppInnerWrapper = styled.div`
   grid-area: d;
-  width: 800px;
+
   min-width: 0;
 `;

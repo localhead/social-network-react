@@ -24,14 +24,13 @@ export class UsersContainer extends React.Component {
     const setFetching = this.props.setFetching;
     setFetching(true);
 
-    this.props.getTotalUsersCountThunk();
+    this.props.getTotalUsersCountThunk(20);
     this.onChangePage();
-    console.log();
   }
 
-  onChangePage = (number = 1) => {
+  onChangePage = (pageNumber = 1) => {
     const pageSize = this.props.usersData.pageSize;
-    this.props.getUsersOnPageThunk(number, pageSize);
+    this.props.getUsersOnPageThunk(pageNumber, pageSize);
   };
 
   onFollowUser = (userId) => {

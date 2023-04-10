@@ -16,8 +16,6 @@ export class ProfileStatus extends React.Component {
     status: this.props.profileStatus,
   };
 
-  componentDidMount() {}
-
   getStatus() {
     this.props.getUserStatus();
   }
@@ -41,7 +39,6 @@ export class ProfileStatus extends React.Component {
   }
 
   onChangeStatus = (e) => {
-    console.log(e.currentTarget.value);
     this.setState({
       status: e.currentTarget.value,
     });
@@ -54,14 +51,19 @@ export class ProfileStatus extends React.Component {
   }
 
   render() {
+    const authUserId = this.props.authData.id;
+    const currentUserId = this.props.userId;
+
     return (
       <StyledProfileStatusContainer>
         {!this.state.editMode && (
           <StyledStaticStatus>
             <StatusText>{this.props.profileStatus}</StatusText>
-            <ButtonOutlined onClick={this.activateStatusEdit.bind(this)}>
-              Изменить
-            </ButtonOutlined>
+            {authUserId === currentUserId && (
+              <ButtonOutlined onClick={this.activateStatusEdit.bind(this)}>
+                Изменить
+              </ButtonOutlined>
+            )}
           </StyledStaticStatus>
         )}
         {this.state.editMode && (

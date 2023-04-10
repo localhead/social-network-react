@@ -46,10 +46,11 @@ class ProfileContainer extends React.Component {
     return (
       <>
         <ProfileInfo
-          profileData={this.props.profilePage.userProfile}
+          profilePage={this.props.profilePage.userProfile}
           profileStatus={this.props.profilePage.userStatus}
           getUserStatus={this.getUserStatus.bind(this)}
           setUserStatus={this.setAuthUserStatus.bind(this)}
+          authData={this.props.authData}
         />
       </>
     );
