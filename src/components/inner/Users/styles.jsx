@@ -22,10 +22,25 @@ export const StyledButtonBasic = styled.div`
 
 export const StyledPages = styled.div`
   display: flex;
+  align-items: center;
   gap: 15px;
-  flex-wrap: wrap;
-  width: 100%;
-  flex-basis: 100%;
+`;
+
+export const StyledPagesNumber = styled.div`
+  width: 15px;
+`;
+
+export const StyledArrow = styled.img`
+  cursor: pointer;
+  border: 1px solid ${colors.gray1};
+  padding: 5px;
+  display: flex;
+  transition: 0.3s ease;
+
+  :hover {
+    border: 1px solid ${colors.dark};
+    background: ${colors.gray0};
+  }
 `;
 
 export const StyledUserCard = styled.div`
@@ -64,6 +79,7 @@ export const StyledContainer = styled.div`
 export const StyledWideContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 30px;
   padding: 40px;
 `;

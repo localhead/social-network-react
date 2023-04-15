@@ -1,6 +1,7 @@
-import React from "react";
+import React, { memo, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 import {
+  StyledArrow,
   StyledButtonBasic,
   StyledButtonSelected,
   StyledContainer,
@@ -8,6 +9,7 @@ import {
   StyledImage,
   StyledNameTitle,
   StyledPages,
+  StyledPagesNumber,
   StyledStatusTitle,
   StyledUnFollowButton,
   StyledUserCard,
@@ -16,7 +18,10 @@ import {
 
 import emptyUser from "../../../assets/img/emptyUser.png";
 
-export const Users = (props) => {
+import arrowLeft from "../../../assets/svgs/arrow-left.svg";
+import arrowRight from "../../../assets/svgs/arrow-right.svg";
+
+const _Users = (props) => {
   const {
     users,
     isFetchingFollowing,
@@ -27,14 +32,16 @@ export const Users = (props) => {
     onUnFollowUser,
   } = props;
 
-  let pagesCount = Math.ceil(totalUserCount / pageSize);
-  const pages = [];
+  const pages = useMemo(() => {
+    let pagesCount = Math.ceil(totalUserCount / pageSize);
+    const pages = [];
 
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
+    for (let i = 1; i <= pagesCount; i++) {
+      pages.push(i);
+    }
 
-  //console.log("global ", isFetchingFollowing);
+    return pages;
+  }, [totalUserCount, pageSize]);
 
   const followUserHandler = (userId) => {
     onFollowUser(userId);
@@ -44,32 +51,55 @@ export const Users = (props) => {
     onUnFollowUser(userId);
   };
 
+  const onLeftArrowClickHandler = () => {
+    currentPage - 1 !== 0 && props.onChangePage(currentPage - 1);
+  };
+
+  const onRightArrowClickHandler = () => {
+    currentPage + 1 < pages.length && props.onChangePage(currentPage + 1);
+  };
+
   return (
     <StyledWideContainer>
       <StyledPages>
-        {pages.map((number, index) => {
-          return (
-            <div key={index}>
-              {number === currentPage ? (
-                <StyledButtonSelected
-                  onClick={(e) => {
-                    props.onChangePage(number);
-                  }}
-                >
-                  {number}
-                </StyledButtonSelected>
-              ) : (
-                <StyledButtonBasic
-                  onClick={(e) => {
-                    props.onChangePage(number);
-                  }}
-                >
-                  {number}
-                </StyledButtonBasic>
-              )}
-            </div>
-          );
-        })}
+        <StyledArrow
+          src={arrowLeft}
+          alt="arrowLeft"
+          onClick={onLeftArrowClickHandler}
+        />
+        {pages
+          .slice(
+            currentPage <= 5 ? 0 : currentPage - 6,
+            currentPage <= 5 ? 10 : currentPage + 5
+          )
+          .map((number, index) => {
+            return (
+              <StyledPagesNumber key={index}>
+                {number === currentPage ? (
+                  <StyledButtonSelected
+                    onClick={(e) => {
+                      props.onChangePage(number);
+                    }}
+                  >
+                    {number}
+                  </StyledButtonSelected>
+                ) : (
+                  <StyledButtonBasic
+                    onClick={(e) => {
+                      props.onChangePage(number);
+                    }}
+                  >
+                    {number}
+                  </StyledButtonBasic>
+                )}
+              </StyledPagesNumber>
+            );
+          })}
+        <StyledArrow
+          src={arrowRight}
+          alt="arrowLeft"
+          onClick={onRightArrowClickHandler}
+        />
       </StyledPages>
       <StyledContainer>
         {users.map((item) => {
@@ -115,3 +145,5 @@ export const Users = (props) => {
     </StyledWideContainer>
   );
 };
+
+export const Users = memo(_Users);
