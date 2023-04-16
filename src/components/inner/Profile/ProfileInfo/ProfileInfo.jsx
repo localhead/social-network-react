@@ -40,7 +40,6 @@ const _ProfileInfo = (props) => {
             <StyledEmptyAvatar src={emptyUser} alt="avatar" />
           )}
           <StyledInfoContainer>
-            qqqq
             <StyledProfileName>{profilePage.fullName}</StyledProfileName>
             <ProfileStatus
               {...profilePage}
