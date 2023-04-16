@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/social-network-react/static/css/main.d093ce76.css",
+    "main.js": "/social-network-react/static/js/main.e3349c75.js",
+    "static/js/154.5ea0259a.chunk.js": "/social-network-react/static/js/154.5ea0259a.chunk.js",
+    "static/js/330.1dd114fd.chunk.js": "/social-network-react/static/js/330.1dd114fd.chunk.js",
+    "static/media/emptyUser.png": "/social-network-react/static/media/emptyUser.c3f945216dc12c9498dc.png",
+    "static/media/spinner.gif": "/social-network-react/static/media/spinner.4c0dabf64bfe071965aa.gif",
+    "static/media/companyLogo.png": "/social-network-react/static/media/companyLogo.2a4ac68c141c74733d5e.png",
+    "static/media/Instagram.svg": "/social-network-react/static/media/Instagram.8378bdeb7f346169babf1fbdda90cae6.svg",
+    "static/media/vk.svg": "/social-network-react/static/media/vk.9a39043566db9864335762d748ac1fd2.svg",
+    "static/media/github.svg": "/social-network-react/static/media/github.828bb4ce3a01c45efbba7f5c312c143b.svg",
+    "static/media/Trash.svg": "/social-network-react/static/media/Trash.0fe5821953ca280ed68aefe31807729d.svg",
+    "static/media/HeartStraight.svg": "/social-network-react/static/media/HeartStraight.252b3c14e67de779607cfa73abb70141.svg",
+    "static/media/HeartStraightWhite.svg": "/social-network-react/static/media/HeartStraightWhite.25911538bc898c0587d4d30b664f87c2.svg",
+    "index.html": "/social-network-react/index.html",
+    "static/media/SignOut.svg": "/social-network-react/static/media/SignOut.b5c3467eb884bdbef0e2ec41018196f7.svg",
+    "static/media/Facebook.svg": "/social-network-react/static/media/Facebook.db58fcca8e2318e21d2bc4861b8768b6.svg",
+    "static/media/UserIcon.svg": "/social-network-react/static/media/UserIcon.fb28162f0f8fc27f418769dd4e7c521a.svg",
+    "static/media/arrow-right.svg": "/social-network-react/static/media/arrow-right.d158f5328a3243ef8dd7e04623645ce5.svg",
+    "static/media/arrow-left.svg": "/social-network-react/static/media/arrow-left.632c0abab9debaf11df4a0cd086ee736.svg",
+    "static/media/CaretRight.svg": "/social-network-react/static/media/CaretRight.81cef254166127913dd29a3f351efd68.svg",
+    "main.d093ce76.css.map": "/social-network-react/static/css/main.d093ce76.css.map",
+    "main.e3349c75.js.map": "/social-network-react/static/js/main.e3349c75.js.map",
+    "154.5ea0259a.chunk.js.map": "/social-network-react/static/js/154.5ea0259a.chunk.js.map",
+    "330.1dd114fd.chunk.js.map": "/social-network-react/static/js/330.1dd114fd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d093ce76.css",
+    "static/js/main.e3349c75.js"
+  ]
+}
