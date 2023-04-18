@@ -28,7 +28,7 @@ import githubIcon from "../../../../assets/svgs/github.svg";
 import vkIcon from "../../../../assets/svgs/vk.svg";
 
 const _ProfileInfo = (props) => {
-  const { profilePage } = props;
+  const { profilePage, authData } = props;
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import { connect } from "react-redux";
 import {
@@ -15,17 +15,26 @@ import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
+    console.log("mount");
     this.getUserStatus();
     this.getUserProfile();
   }
 
-  getUserProfile() {
+  refreshProfile() {
     let authUserId = this.props.authData.id;
     let userId = Number(this.props.router.params.id);
 
     this.props.getProfileDataThunk(
       userId ? userId : authUserId ? authUserId : 2
     );
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("update");
+  }
+
+  getUserProfile() {
+    this.refreshProfile();
   }
 
   setAuthUserStatus(statusText) {

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import React, { Suspense } from "react";
 
 import HeaderContainer from "components/fixed/Header/HeaderContainer";
@@ -49,6 +49,10 @@ class App extends React.Component {
           <StyledAppInnerWrapper>
             <Routes>
               <Route
+                path="/"
+                element={<Navigate to="/profile" replace={true} />}
+              />
+              <Route
                 path="/profile"
                 element={
                   <Suspense fallback={<div>Loading...!!!!</div>}>
@@ -56,7 +60,14 @@ class App extends React.Component {
                   </Suspense>
                 }
               >
-                <Route path=":id" element={<ProfileContainer />} />
+                <Route
+                  path=":id"
+                  element={
+                    <Suspense fallback={<div>Loading...!!!!</div>}>
+                      <ProfileContainer />
+                    </Suspense>
+                  }
+                />
               </Route>
               <Route
                 path="/dialogs"
@@ -68,6 +79,7 @@ class App extends React.Component {
               />
               <Route path="/users" element={<UsersContainer />} />
               <Route path="/login" element={<LoginConnecter />} />
+              <Route path="*" element={<div>404 not found</div>} />
             </Routes>
           </StyledAppInnerWrapper>
         </StyledAppWrapper>
