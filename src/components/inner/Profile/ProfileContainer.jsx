@@ -14,8 +14,11 @@ import { withAuthRedirect } from "components/highOrder/withAuthRedirect";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 
 class ProfileContainer extends React.Component {
+  state = {
+    editMode: false,
+  };
+
   componentDidMount() {
-    console.log("mount");
     this.getUserStatus();
     this.getUserProfile();
   }
@@ -29,8 +32,17 @@ class ProfileContainer extends React.Component {
     );
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log("update");
+  componentDidUpdate() {
+    let authUserId = this.props.authData.id;
+    let userId = Number(this.props.router.params.id);
+
+    if (Number.isNaN(userId) && this.state.editMode === false) {
+      this.props.getProfileDataThunk(authUserId);
+
+      this.setState({
+        editMode: true,
+      });
+    }
   }
 
   getUserProfile() {

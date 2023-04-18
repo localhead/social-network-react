@@ -4,6 +4,7 @@ import { NavBarLinks } from "./Links/NavBarLinks";
 
 class NavbarContainer extends React.Component {
   render() {
+    //console.log("asdads", this.props.isProfileIdIsAuthUserId);
     return <NavBarLinks {...this.props} />;
   }
 }
@@ -11,6 +12,7 @@ class NavbarContainer extends React.Component {
 let mapStateToProps = (state) => {
   return {
     navigationLinks: state.sidebarData.navigationLinks,
+    isProfileIdIsAuthUserId: state.profilePage.isProfileIdIsAuthUserId,
   };
 };
 
