@@ -71,6 +71,13 @@ export const profileReducer = (state = initialState, action) => {
   } else if (action.type === "GET-USER-STATUS") {
     let stateCopy = { ...state, userStatus: action.status };
     return stateCopy;
+  } else if (action.type === "SET-SAVE-PHOTO-SUCCESS") {
+    debugger;
+    let stateCopy = {
+      ...state,
+      userProfile: { ...state.userProfile, photos: action.photo },
+    };
+    return stateCopy;
   }
   return state;
 };
@@ -117,6 +124,13 @@ export const setAuthUserStatus = (statusText) => {
   };
 };
 
+export const setSavePhotoSuccess = (photo) => {
+  return {
+    type: "SET-SAVE-PHOTO-SUCCESS",
+    photo: photo,
+  };
+};
+
 /* 
 
 
@@ -146,4 +160,12 @@ export const setAuthUserStatusThunk = (statusText) => {
       dispatch(setAuthUserStatus(response.data));
     });
   };
+};
+
+export const savePhotoThunk = (file) => async (dispatch) => {
+  let response = await profileAPI.savePhotoApi(file);
+
+  if (response.data.resultCode === 0) {
+    dispatch(setSavePhotoSuccess(response.data.data.photos));
+  }
 };

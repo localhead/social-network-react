@@ -12,6 +12,7 @@ import {
   StyledEmptyAvatar,
   StyledIcon,
   StyledInfoContainer,
+  StyledInputPhoto,
   StyledPostsContainer,
   StyledProfileContactItem,
   StyledProfileContacts,
@@ -28,7 +29,18 @@ import githubIcon from "../../../../assets/svgs/github.svg";
 import vkIcon from "../../../../assets/svgs/vk.svg";
 
 const _ProfileInfo = (props) => {
-  const { profilePage, authData } = props;
+  const { profilePage, authData, savePhotoThunk } = props;
+
+  const authUserId = authData.id;
+
+  console.log(authUserId, profilePage);
+
+  const onChangeClickImage = (e) => {
+    debugger;
+    if (e.target.files.length) {
+      savePhotoThunk(e.target.files[0]);
+    }
+  };
 
   return (
     <>
@@ -39,6 +51,15 @@ const _ProfileInfo = (props) => {
           ) : (
             <StyledEmptyAvatar src={emptyUser} alt="avatar" />
           )}
+          {profilePage && profilePage.userId === authUserId && (
+            <StyledInputPhoto
+              type="file"
+              name="file"
+              id="input__file"
+              onChange={onChangeClickImage}
+            />
+          )}
+
           <StyledInfoContainer>
             <StyledProfileName>{profilePage.fullName}</StyledProfileName>
             <ProfileStatus

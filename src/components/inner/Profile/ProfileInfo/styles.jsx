@@ -11,6 +11,8 @@ export const StyledProfileInfoWrapper = styled.div`
   justify-content: start;
 `;
 
+export const StyledInputPhoto = styled.input``;
+
 export const StyledInfoContainer = styled.div`
   grid-area: i;
   min-width: 0;

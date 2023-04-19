@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {
   getProfileDataThunk,
   getUserStatusThunk,
+  savePhotoThunk,
   setAuthUserStatusThunk,
 } from "redux/profile-reducer";
 
@@ -71,6 +72,7 @@ class ProfileContainer extends React.Component {
           profileStatus={this.props.profilePage.userStatus}
           getUserStatus={this.getUserStatus.bind(this)}
           setUserStatus={this.setAuthUserStatus.bind(this)}
+          savePhotoThunk={this.props.savePhotoThunk}
           authData={this.props.authData}
         />
       </>
@@ -103,4 +105,5 @@ export default connect(mapStateToProps, {
   getProfileDataThunk,
   getUserStatusThunk,
   setAuthUserStatusThunk,
+  savePhotoThunk,
 })(withRouter(AuthRedirectContainer));
