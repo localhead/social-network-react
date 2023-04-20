@@ -1,3 +1,4 @@
+import { ButtonOutlined } from "packages/uiKit/ButtonOutlined";
 import styled from "styled-components";
 import { colors } from "utils/colors";
 
@@ -6,10 +7,21 @@ export const StyledProfileInfoWrapper = styled.div`
   margin-top: 15px;
   grid-template-areas:
     "a i"
+    ". i"
     ". p";
 
   justify-content: start;
 `;
+
+export const StyledButtonOutlined = styled(ButtonOutlined)`
+  transition: 0.3s ease;
+  :hover {
+    background: #d0d0d0;
+    border: 1px solid ${colors.dark};
+  }
+`;
+
+export const StyledContactItem = styled.div``;
 
 export const StyledInputPhoto = styled.input``;
 
@@ -17,6 +29,7 @@ export const StyledInfoContainer = styled.div`
   grid-area: i;
   min-width: 0;
   margin-left: 15px;
+  margin-bottom: 20px;
 `;
 
 export const StyledPostsContainer = styled.div`
@@ -67,6 +80,7 @@ export const StyledProfileContacts = styled.div`
   display: grid;
 
   padding: 15px 10px 18px;
+  margin-bottom: 20px;
 `;
 
 export const StyledContactLink = styled.a`

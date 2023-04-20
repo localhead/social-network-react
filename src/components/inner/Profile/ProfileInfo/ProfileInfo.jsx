@@ -1,11 +1,12 @@
 import { Preloader } from "components/common/preloader/Preloader";
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import emptyUser from "../../../../assets/img/emptyUser.png";
 import { PostsContainer } from "../Posts/PostsContainer";
 import { ProfileStatus } from "../ProfileStatus/ProfileStatus";
 
 import {
   StyledAvatar,
+  StyledButtonOutlined,
   StyledContactEmptyTitle,
   StyledContactLink,
   StyledContactsTitle,
@@ -27,11 +28,18 @@ import facebookIcon from "../../../../assets/svgs/Facebook.svg";
 import instagramIcon from "../../../../assets/svgs/Instagram.svg";
 import githubIcon from "../../../../assets/svgs/github.svg";
 import vkIcon from "../../../../assets/svgs/vk.svg";
+import { ModalWindow } from "./ModalWindow/ModalWindow";
 
 const _ProfileInfo = (props) => {
   const { profilePage, authData, savePhotoThunk } = props;
 
+  const [modalState, setModalState] = useState(false);
+
   const authUserId = authData.id;
+
+  const onEditProfileClick = () => {
+    setModalState((prev) => !prev);
+  };
 
   console.log(authUserId, profilePage);
 
@@ -52,12 +60,14 @@ const _ProfileInfo = (props) => {
             <StyledEmptyAvatar src={emptyUser} alt="avatar" />
           )}
           {profilePage && profilePage.userId === authUserId && (
-            <StyledInputPhoto
-              type="file"
-              name="file"
-              id="input__file"
-              onChange={onChangeClickImage}
-            />
+            <>
+              <StyledInputPhoto
+                type="file"
+                name="file"
+                id="input__file"
+                onChange={onChangeClickImage}
+              />
+            </>
           )}
 
           <StyledInfoContainer>
@@ -78,7 +88,16 @@ const _ProfileInfo = (props) => {
               </StyledWorkStatus>
             </StyledWorkInfoContainer>
             <StyledContactsTitle>Контакты</StyledContactsTitle>
+
             <StyledProfileContacts>
+              {/* {Object.keys(profilePage.contacts).map((key) => {
+                return (
+                  <StyledContactItem key={key}>
+                    {key}
+                    {profilePage.contacts[key]}
+                  </StyledContactItem>
+                );
+              })} */}
               <StyledProfileContactItem>
                 <StyledIcon src={facebookIcon} alt="facebook" />
                 {profilePage.contacts.facebook === null ? (
@@ -132,11 +151,22 @@ const _ProfileInfo = (props) => {
                 )}
               </StyledProfileContactItem>
             </StyledProfileContacts>
+            {profilePage && profilePage.userId === authUserId && (
+              <StyledButtonOutlined onClick={onEditProfileClick}>
+                Редактировать профиль
+              </StyledButtonOutlined>
+            )}
           </StyledInfoContainer>
 
           <StyledPostsContainer>
             <PostsContainer />
           </StyledPostsContainer>
+          {modalState && (
+            <ModalWindow
+              onClickOverlay={onEditProfileClick}
+              profilePage={profilePage}
+            />
+          )}
         </StyledProfileInfoWrapper>
       ) : (
         <Preloader />

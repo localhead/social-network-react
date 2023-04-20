@@ -11,6 +11,11 @@ export const StyledContainer = styled.button`
   padding: 5px 25px;
   display: flex;
   align-items: center;
+
+  transition: 0.3s ease;
+  :hover {
+    background: ${colors.primaryDark};
+  }
 `;
 export const StyledIcon = styled.img`
   width: 24px;
