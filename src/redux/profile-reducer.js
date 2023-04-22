@@ -180,11 +180,15 @@ export const savePhotoThunk = (file) => async (dispatch) => {
 export const saveProfileDataThunk =
   (data) =>
   async (dispatch, getState, state = initialState) => {
-    let response = await profileAPI.saveProfileDataApi(data);
+    try {
+      let response = await profileAPI.saveProfileDataApi(data);
 
-    const theId = getState().authData.id;
+      const theId = getState().authData.id;
 
-    if (response.data.resultCode === 0) {
-      dispatch(getProfileDataThunk(theId));
+      if (response.data.resultCode === 0) {
+        dispatch(getProfileDataThunk(theId));
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
