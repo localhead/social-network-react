@@ -8,11 +8,13 @@ import {
 } from "./styles";
 import React from "react";
 import { TextArea } from "components/common/FormsControl/FormsControl";
-import { requiredField } from "utils/validators";
+
 import { ButtonPrimary } from "packages/uiKit/ButtonPrimary";
 
 export const EditUser = (props) => {
   const { handleSubmit, profilePage } = props;
+
+  console.log(profilePage);
 
   return (
     <StyledEditUserForm onSubmit={handleSubmit}>
@@ -21,26 +23,46 @@ export const EditUser = (props) => {
         <StyledField
           component={TextArea}
           placeholder="Введите текст"
-          name={"messageText"}
+          name={"AboutMe"}
         />
       </StyledFormItem>
       <StyledFormItem>
         <StyledTitle>Full Name:</StyledTitle>
-        <StyledField placeholder="" component={"input"} name={"name"} />
+        <StyledField
+          component={"input"}
+          name={"FullName"}
+          placeholder={profilePage.fullName}
+        />
       </StyledFormItem>
       <StyledFormItem>
         <StyledTitle>Looking for a job?</StyledTitle>
-        <StyledField type="checkbox" component={"input"} name={"jobCheckbox"} />
+        <StyledField
+          type="checkbox"
+          component={"input"}
+          name={"LookingForAJob"}
+        />
       </StyledFormItem>
       <StyledFormItem>
         <StyledTitle>Describe your job</StyledTitle>
         <StyledField
           placeholder=""
           component={"input"}
-          name={"jobDescription"}
+          name={"LookingForAJobDescription"}
         />
       </StyledFormItem>
       <StyledContactsTitle>Contacts</StyledContactsTitle>
+      {Object.keys(profilePage.contacts).map((key) => {
+        return (
+          <StyledFormItem key={key}>
+            <StyledTitle>{key}</StyledTitle>
+            <StyledField
+              placeholder=""
+              component={"input"}
+              name={"contacts." + key}
+            />
+          </StyledFormItem>
+        );
+      })}
       <div>
         <ButtonPrimary>Save</ButtonPrimary>
       </div>

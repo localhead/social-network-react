@@ -67,6 +67,24 @@ export const authAPI = {
 
 
 */
+
+const mock = {
+  aboutMe: "lool",
+  lookingForAJob: true,
+  lookingForAJobDescription: "test",
+  fullName: "rrr",
+  contacts: {
+    github: "https://mail.ru/",
+    vk: "https://mail.ru/",
+    facebook: "https://mail.ru/",
+    instagram: "https://mail.ru/",
+    twitter: "https://mail.ru/",
+    website: "https://mail.ru/",
+    youtube: "https://mail.ru/",
+    mainLink: "https://mail.ru/",
+  },
+};
+
 export const profileAPI = {
   setProfileData(userId) {
     return instance.get(`profile/${userId}`).then((response) => {
@@ -93,6 +111,12 @@ export const profileAPI = {
       headers: {
         "Content-Type": "multipart/form-data",
       },
+    });
+  },
+  saveProfileDataApi(data) {
+    console.log(data);
+    return instance.put(`profile`, data).then((response) => {
+      return response;
     });
   },
 };

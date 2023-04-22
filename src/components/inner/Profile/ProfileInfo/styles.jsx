@@ -47,6 +47,7 @@ export const StyledWorkInfoContainer = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 10px;
+  align-items: center;
 `;
 
 export const StyledContactsTitle = styled.div`
@@ -64,7 +65,7 @@ export const StyledWorkStatusTitle = styled.div`
 export const StyledIcon = styled.img``;
 
 export const StyledWorkStatus = styled.div`
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
 `;
 
@@ -78,7 +79,7 @@ export const StyledProfileContacts = styled.div`
   border-top: 1px solid ${colors.gray1};
   justify-content: space-between;
   display: grid;
-
+  grid-template-columns: auto auto;
   padding: 15px 10px 18px;
   margin-bottom: 20px;
 `;

@@ -131,6 +131,13 @@ export const setSavePhotoSuccess = (photo) => {
   };
 };
 
+export const setSaveProfileDataSuccess = (data) => {
+  return {
+    type: "SET-SAVE-PROFILE-DATA-SUCCESS",
+    photo: data,
+  };
+};
+
 /* 
 
 
@@ -169,3 +176,15 @@ export const savePhotoThunk = (file) => async (dispatch) => {
     dispatch(setSavePhotoSuccess(response.data.data.photos));
   }
 };
+
+export const saveProfileDataThunk =
+  (data) =>
+  async (dispatch, getState, state = initialState) => {
+    let response = await profileAPI.saveProfileDataApi(data);
+
+    const theId = getState().authData.id;
+
+    if (response.data.resultCode === 0) {
+      dispatch(getProfileDataThunk(theId));
+    }
+  };

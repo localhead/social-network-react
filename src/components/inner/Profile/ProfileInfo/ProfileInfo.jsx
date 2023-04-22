@@ -28,10 +28,14 @@ import facebookIcon from "../../../../assets/svgs/Facebook.svg";
 import instagramIcon from "../../../../assets/svgs/Instagram.svg";
 import githubIcon from "../../../../assets/svgs/github.svg";
 import vkIcon from "../../../../assets/svgs/vk.svg";
+import youtubeIcon from "../../../../assets/svgs/YouTube.svg";
+import twitterIcon from "../../../../assets/svgs/twitter.svg";
+import webIcon from "../../../../assets/svgs/global.svg";
+
 import { ModalWindow } from "./ModalWindow/ModalWindow";
 
 const _ProfileInfo = (props) => {
-  const { profilePage, authData, savePhotoThunk } = props;
+  const { profilePage, authData, savePhotoThunk, saveProfileDataThunk } = props;
 
   const [modalState, setModalState] = useState(false);
 
@@ -40,8 +44,6 @@ const _ProfileInfo = (props) => {
   const onEditProfileClick = () => {
     setModalState((prev) => !prev);
   };
-
-  console.log(authUserId, profilePage);
 
   const onChangeClickImage = (e) => {
     debugger;
@@ -80,11 +82,21 @@ const _ProfileInfo = (props) => {
               authData={props.authData}
             />
             <StyledWorkInfoContainer>
+              <StyledWorkStatusTitle>Обо мне:</StyledWorkStatusTitle>
+              <StyledWorkStatus>{profilePage.aboutMe}</StyledWorkStatus>
+            </StyledWorkInfoContainer>
+            <StyledWorkInfoContainer>
               <StyledWorkStatusTitle>Место работы:</StyledWorkStatusTitle>
               <StyledWorkStatus>
-                {profilePage.lookingForAJob === false
+                {profilePage.lookingForAJob === true
                   ? "Ищу работу"
-                  : profilePage.lookingForAJobDescription}
+                  : "Трудоустроен"}
+              </StyledWorkStatus>
+            </StyledWorkInfoContainer>
+            <StyledWorkInfoContainer>
+              <StyledWorkStatusTitle>Описание работы:</StyledWorkStatusTitle>
+              <StyledWorkStatus>
+                {profilePage.lookingForAJobDescription}
               </StyledWorkStatus>
             </StyledWorkInfoContainer>
             <StyledContactsTitle>Контакты</StyledContactsTitle>
@@ -150,6 +162,45 @@ const _ProfileInfo = (props) => {
                   </StyledContactLink>
                 )}
               </StyledProfileContactItem>
+              <StyledProfileContactItem>
+                <StyledIcon src={youtubeIcon} alt="youtube" />
+                {profilePage.contacts.youtube === null ? (
+                  <StyledContactEmptyTitle>не указано</StyledContactEmptyTitle>
+                ) : (
+                  <StyledContactLink
+                    href={profilePage.contacts.youtube}
+                    target="_blank"
+                  >
+                    {profilePage.contacts.youtube}
+                  </StyledContactLink>
+                )}
+              </StyledProfileContactItem>
+              <StyledProfileContactItem>
+                <StyledIcon src={webIcon} alt="website" />
+                {profilePage.contacts.youtube == null ? (
+                  <StyledContactEmptyTitle>не указано</StyledContactEmptyTitle>
+                ) : (
+                  <StyledContactLink
+                    href={profilePage.contacts.youtube}
+                    target="_blank"
+                  >
+                    {profilePage.contacts.youtube}
+                  </StyledContactLink>
+                )}
+              </StyledProfileContactItem>
+              <StyledProfileContactItem>
+                <StyledIcon src={twitterIcon} alt="twitter" />
+                {profilePage.contacts.twitter == null ? (
+                  <StyledContactEmptyTitle>не указано</StyledContactEmptyTitle>
+                ) : (
+                  <StyledContactLink
+                    href={profilePage.contacts.twitter}
+                    target="_blank"
+                  >
+                    {profilePage.contacts.twitter}
+                  </StyledContactLink>
+                )}
+              </StyledProfileContactItem>
             </StyledProfileContacts>
             {profilePage && profilePage.userId === authUserId && (
               <StyledButtonOutlined onClick={onEditProfileClick}>
@@ -165,6 +216,8 @@ const _ProfileInfo = (props) => {
             <ModalWindow
               onClickOverlay={onEditProfileClick}
               profilePage={profilePage}
+              onClose={onEditProfileClick}
+              saveProfileDataThunk={saveProfileDataThunk}
             />
           )}
         </StyledProfileInfoWrapper>

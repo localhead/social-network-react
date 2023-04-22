@@ -32,10 +32,10 @@ export const StyledModalContent = styled.div`
   position: absolute;
   background: #fff;
   left: 50%;
-  top: 50%;
+  top: 75%;
   transform: translate(-50%, -50%);
   width: 35%;
-  height: 63%;
+  height: 800px;
   display: flex;
   transition: all 0.5s;
   padding: 35px;
